@@ -6,10 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  loginView: boolean;
+  registerView: boolean;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onLoginClick() {
+    console.log('login clicked');
+    this.loginView = !this.loginView;
+    this.registerView = false;
+  }
+
+  onRegisterClick() {
+    console.log('register clicked');
+    this.registerView = !this.registerView;
+    this.loginView = false;
   }
 
 }

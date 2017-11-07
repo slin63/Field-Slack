@@ -1,33 +1,45 @@
 <!-- Grid documentation: https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp -->
 
-<div class="jumbotron text-center">
-  <h1>MEAN Authentication App</h1>
-  <p class="lead">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ad, nobis dolorum dolorem magni qui, numquam minus distinctio recusandae eius mollitia soluta, maiores ipsum? Maiores cupiditate soluta temporibus natus dolore.
-  </p>
-  <div>
-    <a class="btn btn-primary" routerLink="/register">Register</a>
-    <a class="btn btn-info" routerLink="/login">Login</a>
-  </div>
+<div class="container">
+    <div class="jumbotron">
+        <div class="text-center">
+          <h1>Field-Slack</h1>
+          <p class="lead">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ad, nobis dolorum dolorem magni qui, numquam minus distinctio recusandae eius mollitia soluta, maiores ipsum? Maiores cupiditate soluta temporibus natus dolore.
+          </p>
+          <input type="submit" class="btn btn-success" value="Login" (click)="onLoginClick()">
+          <input type="submit" class="btn btn-primary" value="Register" (click)="onRegisterClick()">
+        </div>
+
+        <div *ngIf=(this.loginView)>
+          <app-login></app-login>
+        </div>
+
+        <div *ngIf=(this.registerView)>
+            <app-register></app-register>
+        </div>
+    </div>
 </div>
+
+  
 
 <div class="row">
   <div class="col-md-4">
-    <h3>Express Backend</h3>
+    <h3>Function 1</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ad, nobis dolorum dolorem magni qui,numquam minus distinctio recusandae eius mollitia soluta, maiores ipsum? Maiores cupiditate soluta temporibus natus dolore.
     </p>
   </div>
 
   <div class="col-md-4">
-    <h3>Angular CLI</h3>
+    <h3>Function 2</h3>
     <p>
       To generate components, services, consectetur adipisicing elit. Blanditiis ad, nobis dolorum dolorem magni qui,numquam minus distinctio recusandae eius mollitia soluta, maiores ipsum? Maiores cupiditate soluta temporibus natus dolore.
     </p>
   </div>
 
   <div class="col-md-4">
-    <h3>JSON Web Tokens (JWT)</h3>
+    <h3>Function 3</h3>
     <p>
       Full featured authentication using JSON web tokens. Used for logins and to store user data. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ad, nobis dolorum dolorem magni qui,numquam minus distinctio recusandae eius mollitia soluta, maiores ipsum? Maiores cupiditate soluta temporibus natus dolore.
     </p>
