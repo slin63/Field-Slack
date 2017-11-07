@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LocalService } from '../../services/local.service';
-import { AuthService } from '../../services/auth.service';
-import { ValidateService } from '../../services/validate.service';
+import { LocalService } from '../../../services/local.service';
+import { AuthService } from '../../../services/auth.service';
+import { ValidateService } from '../../../services/validate.service';
 import { Router } from '@angular/router';
 
 import { FlashMessagesService } from 'angular2-flash-messages';

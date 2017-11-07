@@ -1,0 +1,13 @@
+Landing Page:
+    - Two forms:
+        - Create new user group 
+            - (if notRegistered): Register new user with work email
+            - Register new user_group and supply user_group details
+            - Provide link or registration code for people looking to join user_group
+                - Privacy settings:
+                    - Private mode: Admins must approve group signups if private mode enabled
+        - Join user group
+            - (if notRegistered): Register new user with work email
+            - Provide link or registration code for people looking to join user_group
+
+            

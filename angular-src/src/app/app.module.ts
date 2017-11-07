@@ -5,12 +5,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavbarComponent } from './components/components-nav/navbar/navbar.component';
+import { HomeComponent } from './components/components-landing/home/home.component';
+
+import { LoginComponent } from './components/components-user/login/login.component';
+import { RegisterComponent } from './components/components-user/register/register.component';
+import { ProfileComponent } from './components/components-user/profile/profile.component';
+import { DashboardComponent } from './components/components-user/dashboard/dashboard.component';
 
 import { LocalService } from './services/local.service';
 import { ValidateService } from './services/validate.service';
