@@ -2,7 +2,7 @@
 
 <!doctype html>
 <html lang="en">
-  <body>
+  <body *ngIf="this.authService.loggedIn()">
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Field-Slack</a>
@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
           </li>
         </ul>
 
@@ -34,6 +34,8 @@
       </div>
 
     </nav>
+
+    <br>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->

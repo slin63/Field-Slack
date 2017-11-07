@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,9 +12,16 @@ export class HomeComponent implements OnInit {
   loginView: boolean;
   registerView: boolean;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    // If the user's logged in, send them to their dashboard
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   onLoginClick() {
