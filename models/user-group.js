@@ -9,13 +9,13 @@ const UserGroupSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    registration_code: {
+    user_group_code: {
         type: String,
         required: true,
         unique: true
     },
     users: [{
-        userID: mongoose.Types.ObjectId,
+        userID: String,
         role: String
     }]
 

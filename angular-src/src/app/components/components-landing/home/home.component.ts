@@ -15,13 +15,11 @@ export class HomeComponent implements OnInit {
   }
 
   onLoginClick() {
-    console.log('login clicked');
     this.loginView = !this.loginView;
     this.registerView = false;
   }
 
   onRegisterClick() {
-    console.log('register clicked');
     this.registerView = !this.registerView;
     this.loginView = false;
   }

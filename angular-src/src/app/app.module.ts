@@ -7,11 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/components-nav/navbar/navbar.component';
 import { HomeComponent } from './components/components-landing/home/home.component';
-
 import { LoginComponent } from './components/components-user/login/login.component';
 import { RegisterComponent } from './components/components-user/register/register.component';
 import { ProfileComponent } from './components/components-user/profile/profile.component';
 import { DashboardComponent } from './components/components-user/dashboard/dashboard.component';
+import { LandingLoginComponent } from './components/components-landing/landing-login/landing-login.component';
 
 import { LocalService } from './services/local.service';
 import { ValidateService } from './services/validate.service';
@@ -48,7 +48,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    LandingLoginComponent
   ],
   imports: [
     BrowserModule,

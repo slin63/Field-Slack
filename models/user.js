@@ -18,7 +18,11 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    user_groups: [{
+        user_group_ID: String,
+        role: String
+    }]
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

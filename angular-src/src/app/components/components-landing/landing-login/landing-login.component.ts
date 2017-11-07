@@ -1,34 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ValidateService } from '../../../services/validate.service';
 import { AuthService } from '../../../services/auth.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { ValidateService } from '../../../services/validate.service';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
-})
+import { FlashMessagesService } from 'angular2-flash-messages';
 
-export class RegisterComponent implements OnInit {
+@Component({
+  selector: 'app-landing-login',
+  templateUrl: './landing-login.component.html',
+  styleUrls: ['./landing-login.component.css']
+})
+export class LandingLoginComponent implements OnInit {
   name: String;
   username: String;
   email: String;
   password: String;
 
-  // Inject services
+  login: boolean;
+  register: boolean;
+
   constructor(
-    private validateService: ValidateService,
-    private flashMessage: FlashMessagesService,
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private flashMessage: FlashMessagesService,
+    private validateService: ValidateService
+  ) { };
 
   ngOnInit() {
+    this.login = true;
+    this.register = false;
   }
 
-  // Requires a validation service
+  onLoginSubmit() {
+    const user = {
+      username: this.username,
+      password: this.password
+    }
+
+    // This service is an observable so we must "subcribe" to it.
+    this.authService.authenticateUser(user).subscribe(data => {
+      console.log(data);
+      if (data.success) {
+        this.flashMessage.show('You\'re logged in.', {cssClass: 'alert-success', timeout: 3000});
+        this.authService.storeUserData(data.token, data.user);
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.flashMessage.show('Incorrect password / username.', {cssClass: 'alert-danger', timeout: 3000});
+      }
+    });
+  }
+
+  
+
   onRegisterSubmit() {
     const user = {
       name: this.name,
@@ -60,12 +84,21 @@ export class RegisterComponent implements OnInit {
       if (data.success) {
         this.flashMessage.show('You\'re registered.',
           {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
       } else {
         this.flashMessage.show('Something goofed.',
           {cssClass: 'alert-danger', timeout: 3000});
       }
     });
+
+    this._toggleRegisterLogin(this.username);
+  }
+
+  _toggleRegisterLogin(username: String) {
+    this.login = !this.login;
+    this.register = !this.register;
+
+    this.username = username;
   }
 
 }
