@@ -1,0 +1,2 @@
+angular-cli.json:
+    changed "outDir" from dist to "../public"
