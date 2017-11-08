@@ -5,5 +5,6 @@
 
 export const environment = {
   api_url: 'http://localhost:3000/',
+  git_url: 'https://github.com/slin63/Field-Slack',
   production: false
 };

@@ -13,3 +13,16 @@ Dashboard: (not started)
     - Join user group
         - (if notRegistered): Register new user with work email
         - Provide link or registration code for people looking to join user_group
+
+Usergroup API: (outlined)
+    - generateUserGroupCode()
+        - Needs to generate a unique 6 digit code for a user group
+        - Needs to compare against db to make sure this code doesn't already exist
+    - addUserToGroup(user)
+        - Adds user to existing UserGroup
+    - getUserGroupByUserGroupCode(userGroupCode, callback)
+        - See function name
+    - addUserGroup(newUserGroup, callback)
+        - See function name
+
+    - Do these functions need callbacks?

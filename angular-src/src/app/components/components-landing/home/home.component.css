@@ -3,18 +3,26 @@
 }
 
 #landing-page {
+    position:absolute;
     background-image: url("../../../../assets/images/landing_background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /*centers items on the line (the x-axis by default)*/
+    align-items: center; /*centers items on the cross-axis (y by default)*/
+   
 }
 
 .jumbotron {
     padding: 50px;
+    height: 60%;
     background: rgb(190, 193, 190); /* This is for ie8 and below */
     background: rgba(190, 193, 190, 0.75); 
  }
+
 
 
  .card {
@@ -22,4 +30,5 @@
     margin: 20px;
     background: rgb(190, 193, 190); /* This is for ie8 and below */
     background: rgba(190, 193, 190, 0.75); 
- }
+}
+
