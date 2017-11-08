@@ -50,6 +50,8 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
     // Create usergroup and add user to usergroup
     UserGroup.addUserGroup(newUserGroup, (err, userGroup) => {
         if (err) {
+
+            console.log(err);
             res.json( { success: false, msg: 'Failed to create Usergroup.' } );
         }
         else {

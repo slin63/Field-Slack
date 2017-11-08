@@ -21,8 +21,7 @@ const UserSchema = mongoose.Schema({
     },
     user_groups: [{
         user_group_code: {
-            type: String,
-            unique: true
+            type: String
         },
         role: String
     }]

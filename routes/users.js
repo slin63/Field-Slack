@@ -74,5 +74,19 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
+// POST to get all a user's UserGroups
+router.post('/usergroups', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    UserGroup.getUserGroupByUserGroupCode(req.body.user_group_code, (err, userGroup) => {
+        if (err) {
+            res.json( { success: false, msg: 'Failed to get Usergroup.' } );
+        } else {
+            res.json({
+                success: true,
+                user_group: userGroup
+            });
+        }
+    });
+});
+
 // Export the router so that other modules can use this
 module.exports = router;

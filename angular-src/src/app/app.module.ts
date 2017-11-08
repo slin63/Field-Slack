@@ -10,7 +10,7 @@ import { HomeComponent } from './components/components-landing/home/home.compone
 import { LoginComponent } from './components/components-user/login/login.component';
 import { RegisterComponent } from './components/components-user/register/register.component';
 import { ProfileComponent } from './components/components-user/profile/profile.component';
-import { DashboardComponent } from './components/components-user/dashboard/dashboard.component';
+import { DashboardComponent } from './components/components-dashboard/dashboard/dashboard.component';
 import { LandingLoginComponent } from './components/components-landing/landing-login/landing-login.component';
 
 import { LocalService } from './services/local.service';

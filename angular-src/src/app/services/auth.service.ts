@@ -63,7 +63,7 @@ export class AuthService {
     const res =  this.http.get(environment.api_url + 'users/profile', 
       {headers: headers})
       .map(res => res.json());
-    
+
     return res;
   }
 

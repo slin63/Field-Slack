@@ -1,19 +1,19 @@
-Landing Page: (mostly done)
-    - Combined login/registration component
-        - Same as current login component, but with a registration button next to the login button
-        - Redirects you to register form with your proposed username/password filled out for you
-
-Dashboard: (not started)
-    - Create new user group 
-        - (if notRegistered): Register new user with work email
-        - Register new user_group and supply user_group details
-        - Provide link or registration code for people looking to join user_group
-            - Privacy settings:
-                - Private mode: Admins must approve group signups if private mode enabled
-    - Join user group
-        - (if notRegistered): Register new user with work email
-        - Provide link or registration code for people looking to join user_group
-
+Dashboard: (API: done) (UI: not started) (services: not started)
+    - UI 
+        - Create new user group 
+            - Register new user_group and supply user_group details
+            - Provide link or registration code for people looking to join user_group
+                - Privacy settings:
+                    - Private mode: Admins must approve group signups if private mode enabled
+        - Join user group
+            - (if notRegistered): Register new user with work email
+            - Provide link or registration code for people looking to join user_group
+    - Services
+        - getUserUsergroups
+        - 
+    - API -> DONE
+        
+    
 Usergroup API: (outlined)
     - generateUserGroupCode() -> DONE
         - Needs to compare against db to make sure this code doesn't already exist -> not neccessary.
@@ -30,3 +30,10 @@ Usergroup API: (outlined)
 
     - checkUserGroupInUser(user, userGroup) -> DONE
         - Checks if usergroup is already in user's groups.
+
+Landing Page: (mostly done)
+    - Combined login/registration component
+        - Same as current login component, but with a registration button next to the login button
+        - Redirects you to register form with your proposed username/password filled out for you
+
+
