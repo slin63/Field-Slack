@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 const User = require('../models/user');
+const UserGroup = require('../models/usergroup');
 
 // Register POST
 router.post('/register', (req, res, next) => {
@@ -76,17 +77,14 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 
 // POST to get all a user's UserGroups
 router.post('/usergroups', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    UserGroup.getUserGroupByUserGroupCode(req.body.user_group_code, (err, userGroup) => {
+    User.GetUserUserGroups(req.user, (err, userGroups) => {
         if (err) {
-            res.json( { success: false, msg: 'Failed to get Usergroup.' } );
+            res.json( { success: false, msg: 'Failed to get Usergroups.' } );
         } else {
-            res.json({
-                success: true,
-                user_group: userGroup
-            });
+            res.json( { success: false, user_groups: userGroups } );
         }
-    });
-});
+    }
+)});
 
 // Export the router so that other modules can use this
 module.exports = router;

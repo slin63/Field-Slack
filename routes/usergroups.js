@@ -10,9 +10,10 @@ const UserGroup = require('../models/usergroup');
 // POST to join a user group (dual sided addition)
 // GetUserGroupbyGroupCode, check if user is already in group, if not, add to group and add the group to user
 router.post('/join', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    role = req.body.role;
+    const role = req.body.role;
+
     UserGroup.getUserGroupByUserGroupCode(req.body.user_group_code, (err, userGroup) => {
-        if (err) {
+        if (err || userGroup == null) {
             res.json( { success: false, msg: 'Failed to get Usergroup.' } );
         } else {
             UserGroup.UserInGroup(req.user, userGroup.user_group_code, (err, exists) => {
@@ -50,7 +51,6 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
     // Create usergroup and add user to usergroup
     UserGroup.addUserGroup(newUserGroup, (err, userGroup) => {
         if (err) {
-
             console.log(err);
             res.json( { success: false, msg: 'Failed to create Usergroup.' } );
         }

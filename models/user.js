@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs'); // For encryption
 const config = require('../config/database');
 
+const UserGroup = require('./usergroup');
+
+
 // User schema
 const UserSchema = mongoose.Schema({
     name: {
@@ -78,11 +81,27 @@ module.exports.addUserGroupToUser = function(user, role, userGroup, callback) {
     User.findOneAndUpdate(query, doc, {}, callback);
 }
 
+// Checks if UserGroup is in User's user_group attribute
 module.exports.UserGroupInUser = function(user, userGroupCode, callback) {
     const query = {
-        _id: user._id,
+        
         user_groups: {$elemMatch: {user_group_code: userGroupCode}}
     }
 
     User.findOne(query, callback);
+}
+
+// Finds all userGroups the user is attached to
+// https://docs.mongodb.com/manual/reference/method/db.collection.find/
+module.exports.GetUserUserGroups = function(user, callback) {
+    const user_group_codes = []
+    for (let i = 0; i < user.user_groups.length; i++) {
+        user_group_codes.push(user.user_groups[i].user_group_code);
+    }
+
+    const query = {
+        user_group_code: { $in: user_group_codes}
+    }
+
+    UserGroup.find(query, callback);
 }
