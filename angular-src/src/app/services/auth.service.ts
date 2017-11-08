@@ -30,7 +30,6 @@ export class AuthService {
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
     // Gets JSON response from backend by passing data given from frontend form
     return this.http.post(environment.api_url + 'users/authenticate', user,
      {headers: headers}).map(res => res.json());
@@ -59,13 +58,11 @@ export class AuthService {
     const headers = new Headers();
     this._loadToken();
     headers.append('Authorization', this.authToken);
-    console.log(this.authToken);
     headers.append('Content-Type', 'application/json'); 
 
     const res =  this.http.get(environment.api_url + 'users/profile', 
       {headers: headers})
       .map(res => res.json());
-    console.log(res);
     
     return res;
   }

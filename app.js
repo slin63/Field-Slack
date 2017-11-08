@@ -22,9 +22,6 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-// Include users router
-const users = require('./routes/users');
-
 // Port number
 const port = webconfig.port;
 // const port = process.env.PORT || 8080; // For deployment to Heroku
@@ -46,8 +43,13 @@ app.use(passport.session());
 // Include the passport configuration
 require('./config/passport')(passport);
 
+// Routers
+const users = require('./routes/users');
+const usergroups = require('./routes/usergroups');
+
 // Any URL based on '/users/*' files pointed to by users
 app.use('/users', users);
+app.use('/usergroups', usergroups);
 
 // Index Route
 app.get('/', (req, res) => {

@@ -20,7 +20,10 @@ const UserSchema = mongoose.Schema({
         required: true,
     },
     user_groups: [{
-        user_group_ID: String,
+        user_group_ID: {
+            type: String,
+            unique: true
+        },
         role: String
     }]
 });
@@ -58,4 +61,20 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
         if (err) throw err;
         callback(null, isMatch);
     });
+}
+
+// Add userGroup to user
+// https://stackoverflow.com/questions/29384459/inserting-elements-in-array-mongoose-creates-object-in-nodejs
+module.exports.addUserGroupToUser = function(user, role, userGroup, callback) {
+    const query = {_id: user._id};
+    const doc = {
+        $push: {
+            'user_groups': {
+                user_group_ID: userGroup._id,
+                role: role
+            }
+        }
+    }
+
+    User.findOneAndUpdate(query, doc, {}, callback);
 }

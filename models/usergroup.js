@@ -10,7 +10,7 @@ const UserGroupSchema = mongoose.Schema({
         unique: true
     },
     is_private: {
-        type: boolean,
+        type: Boolean,
         required: false
     },
     user_group_code: {
@@ -19,7 +19,10 @@ const UserGroupSchema = mongoose.Schema({
         unique: true
     },
     users: [{
-        userID: String,
+        userID: {
+            type: String,
+            unique: true
+        },
         role: String
     }]
 });
@@ -28,21 +31,40 @@ const UserGroup = module.exports = mongoose.model('UserGroup', UserGroupSchema);
 
 // Business logic ------
 module.exports.addUserGroup = function(newUserGroup, callback) {
-    newUserGroup.user_group_code = generateUserGroupCode();
+    newUserGroup.user_group_code = this.generateUserGroupCode();
     newUserGroup.save(callback);
 }
 
 module.exports.getUserGroupByUserGroupCode = function(userGroupCode, callback) {
-    const query = {userGroupCode: userGroupCode};
+    if (userGroupCode == null) {
+        throw Error('Attempting to look up UserGroup with NULL UserGroupCode!');
+    }
+    const query = {user_group_code: userGroupCode};
     UserGroup.findOne(query, callback);
 }
 
 module.exports.generateUserGroupCode = function() {
-    //TODO;
-    return 'TODO';
+    let groupCode = "";
+    const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 6; i++)
+      groupCode += charSet.charAt(Math.floor(Math.random() * charSet.length));
+  
+    return groupCode;  
 }
 
-module.exports.addUserToGroup = function(user) {
-    //TODO;
-    return 'TODO;'
+// https://stackoverflow.com/questions/29384459/inserting-elements-in-array-mongoose-creates-object-in-nodejs
+module.exports.addUserToGroup = function(user, role, userGroup, callback) {
+    const query = {_id: userGroup._id};
+    const doc = {
+        $push: {
+            'users': {
+                userID: user._id,
+                role: role
+            }
+        }
+    }
+
+    UserGroup.findOneAndUpdate(query, doc, {}, callback);
 }
+

@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
     // This service is an observable so we must "subcribe" to it.
     this.authService.authenticateUser(user).subscribe(data => {
-      console.log(data);
       if (data.success) {
         this.flashMessage.show('You\'re logged in.', {cssClass: 'alert-success', timeout: 3000});
         this.authService.storeUserData(data.token, data.user);

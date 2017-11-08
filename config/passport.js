@@ -4,7 +4,6 @@ const User = require('../models/user');
 const config = require('../config/database');
 
 module.exports = function(passport) {
-    console.log(passport);
     let opts = { };
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
     opts.secretOrKey = config.secret;
