@@ -1,9 +1,9 @@
-Landing Page:
+Landing Page: (mostly done)
     - Combined login/registration component
         - Same as current login component, but with a registration button next to the login button
         - Redirects you to register form with your proposed username/password filled out for you
 
-Dashboard:
+Dashboard: (not started)
     - Create new user group 
         - (if notRegistered): Register new user with work email
         - Register new user_group and supply user_group details

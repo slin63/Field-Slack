@@ -12,14 +12,14 @@
 
 .jumbotron {
     padding: 50px;
-    background: rgb(200, 255, 255); /* This is for ie8 and below */
-    background: rgba(200, 255, 255, 0.75); 
+    background: rgb(190, 193, 190); /* This is for ie8 and below */
+    background: rgba(190, 193, 190, 0.75); 
  }
 
 
  .card {
     padding: 10px;
-    margin: 10px;
-    background: rgb(200, 255, 255); /* This is for ie8 and below */
-    background: rgba(200, 255, 255, 0.75); 
+    margin: 20px;
+    background: rgb(190, 193, 190); /* This is for ie8 and below */
+    background: rgba(190, 193, 190, 0.75); 
  }
