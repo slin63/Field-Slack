@@ -68,3 +68,11 @@ module.exports.addUserToGroup = function(user, role, userGroup, callback) {
     UserGroup.findOneAndUpdate(query, doc, {}, callback);
 }
 
+module.exports.UserInGroup = function(user, userGroupCode, callback) {
+    const query = {
+        user_group_code: userGroupCode,
+        users: {$elemMatch: {userID: user._id.toString()}}
+    }
+
+    UserGroup.findOne(query, callback);
+}

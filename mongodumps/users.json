@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5a02918dd3f5a3e173aa633b"},"name":"Shean Lin","email":"slin63@illinois.edu","username":"slin63","password":"$2a$10$yVmLowJZNkHEkBBkgEFREuMkCsDaVzMwTatu3szZ1MvNwRndEF7Qy","user_groups":[{"role":"admin","user_group_code":"tUaRp7","_id":{"$oid":"5a0291c2d4e439e18e3b3dfd"}}],"__v":0}

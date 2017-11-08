@@ -25,8 +25,8 @@ Usergroup API: (outlined)
     - getUserGroupByUserGroupCode(userGroupCode, callback) -> DONE
         - See function name
 
-    - checkUserInUserGroup(user, userGroup)
+    - checkUserInUserGroup(user, userGroup) -> DONE
         - Checks if user is already in UserGroup's users.
 
-    - checkUserGroupInUser(user, userGroup)
+    - checkUserGroupInUser(user, userGroup) -> DONE
         - Checks if usergroup is already in user's groups.

@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
         required: true,
     },
     user_groups: [{
-        user_group_ID: {
+        user_group_code: {
             type: String,
             unique: true
         },
@@ -70,11 +70,20 @@ module.exports.addUserGroupToUser = function(user, role, userGroup, callback) {
     const doc = {
         $push: {
             'user_groups': {
-                user_group_ID: userGroup._id,
+                user_group_code: userGroup.user_group_code,
                 role: role
             }
         }
     }
 
     User.findOneAndUpdate(query, doc, {}, callback);
+}
+
+module.exports.UserGroupInUser = function(user, userGroupCode, callback) {
+    const query = {
+        _id: user._id,
+        user_groups: {$elemMatch: {user_group_code: userGroupCode}}
+    }
+
+    User.findOne(query, callback);
 }
