@@ -1,11 +1,23 @@
-<div class="container">
-  <h2 class="page-header">Dashboard</h2>
-  <div class="card text-white bg-primary">
-    <div class="card-body">
-      <blockquote class="card-blockquote">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
-    </div>
-  </div>
-</div>
+
+  <div id="dashboard">
+    <!-- <div class="user-groups"> -->
+      <ul id="user-group-list" *ngIf="usergroups">
+        <li *ngFor="let group of usergroups">
+            <div class="card text-white mb-3 d-inline-block">
+              <h3 class="card-header">{{ group.name }}</h3>
+                <div class="card-body">
+                  <h6 class="card-title">{{ group.user_group_code }}</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the loremm70 card's content.</p>
+                </div>
+              </div>
+        </li>
+      </ul>
+      <div class="group-management" #elseBlock>
+        Grop manamgenet section
+      </div>
+
+      <div id="user-profile">
+          <app-profile></app-profile>
+      </div>
+
+  </div>  

@@ -1,13 +1,9 @@
 Service -> Hits API server for DB Info
 
-CURRENT:
-    For some reason slin63 user has a bunch of usergroups attached to him that don't exist.
-        - Fix this and find out why that happened.
-
-    Then test /users/usergroups/ API using RESTer
 
 Dashboard: (API: done) (UI: not started) (services: not started)
     - UI 
+        - Use ELEMENT:nth-child(odd) in CSS to get alternating colors for userGroups in dashboard view
         - Create new user group 
             - Register new user_group and supply user_group details
             - Provide link or registration code for people looking to join user_group
@@ -45,3 +41,5 @@ Landing Page: (mostly done)
         - Redirects you to register form with your proposed username/password filled out for you
 
 
+KNOWN BUGS:
+    For some reason slin63 user has a bunch of usergroups attached to him that don't exist.

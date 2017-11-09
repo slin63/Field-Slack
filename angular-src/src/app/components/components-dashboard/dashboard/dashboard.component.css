@@ -1,0 +1,35 @@
+#dashboard {
+    display: grid;
+    grid-gap: 5em;
+    padding: 0 1.6em;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.group-management {
+    grid-row: 1;
+    grid-column: 1/3;
+    padding: 0px;
+}
+
+#user-group-list {
+    grid-auto-rows: minmax(2fr, auto);
+    grid-column: 1/3;
+    list-style: none;
+    padding: 0px;
+}
+
+#user-group-list li .card {
+    grid-column: 1/3;
+    background-color: rgb(87, 167, 198);
+}
+
+#user-group-list li:nth-child(odd) .card {
+    background-color: rgb(95, 95, 95);
+}
+
+#user-profile {
+    grid-column: 3/6;
+    grid-row: 1/3;
+}
+

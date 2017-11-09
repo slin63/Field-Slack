@@ -16,6 +16,7 @@ import { LandingLoginComponent } from './components/components-landing/landing-l
 import { LocalService } from './services/local.service';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { UsergroupService } from './services/usergroup.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -58,7 +59,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ ValidateService, AuthService, AuthGuard, LocalService ],
+  providers: [ 
+    ValidateService, 
+    AuthService, 
+    AuthGuard, 
+    LocalService,
+    UsergroupService
+   ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

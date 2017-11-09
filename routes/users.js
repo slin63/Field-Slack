@@ -75,13 +75,13 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
-// POST to get all a user's UserGroups
-router.post('/usergroups', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+// GET all a user's UserGroups
+router.get('/usergroups', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     User.GetUserUserGroups(req.user, (err, userGroups) => {
         if (err) {
             res.json( { success: false, msg: 'Failed to get Usergroups.' } );
         } else {
-            res.json( { success: false, user_groups: userGroups } );
+            res.json( { success: true, user_groups: userGroups } );
         }
     }
 )});
