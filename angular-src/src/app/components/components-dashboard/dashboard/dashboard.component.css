@@ -1,19 +1,50 @@
 #dashboard {
     display: grid;
-    grid-gap: 5em;
+    grid-gap: 2em;
     padding: 0 1.6em;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, auto);
+}
+
+.section-title {
+    font-size: 60px;
+    grid-row: 1;
+    padding-bottom: .2em;
+    border-bottom-style: solid;
+}
+
+#group-title {
+    font-size: 60px;
+    grid-auto-rows: minmax(max-content, 2fr);
+    /* grid-row:; */
+    /* grid-row: minmax(1, auto); */
+    grid-column: 1/3;
+}
+
+#profile-title {
+    font-size: 60px;
+    /* grid-row: minmax(1, auto); */
+    grid-column: 3;
+}
+
+.section-header {
+    padding: 0.2em;
+    /* margin: 2px; */
 }
 
 .group-management {
-    grid-row: 1;
+    grid-row: 3;
     grid-column: 1/3;
     padding: 0px;
 }
 
+#group-manage-button {
+    grid-column: 1/3;
+    grid-row: 2;
+}
+
 #user-group-list {
-    grid-auto-rows: minmax(2fr, auto);
+    grid-row: 3;
     grid-column: 1/3;
     list-style: none;
     padding: 0px;
@@ -29,7 +60,8 @@
 }
 
 #user-profile {
-    grid-column: 3/6;
-    grid-row: 1/3;
+    grid-column: 3;
+    grid-row: 2/6;
 }
+
 

@@ -1,5 +1,7 @@
 Service -> Hits API server for DB Info
 
+Model Changes:
+    - Usergroup needs a description section
 
 Dashboard: (API: done) (UI: not started) (services: not started)
     - UI 

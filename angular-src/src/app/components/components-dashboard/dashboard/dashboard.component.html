@@ -1,7 +1,12 @@
 
   <div id="dashboard">
     <!-- <div class="user-groups"> -->
-      <ul id="user-group-list" *ngIf="usergroups">
+
+      <h1 class="section-title" id="group-title">Group Management</h1>
+      <div id="group-manage-button" *ngIf="viewGroupControlsButton">
+          <button type="button" (click)="onViewGroupControlsClick()"class="btn btn-primary btn-lg btn-block">Create or Join a Group</button>
+      </div>
+      <ul id="user-group-list" *ngIf="viewGroups">
         <li *ngFor="let group of usergroups">
             <div class="card text-white mb-3 d-inline-block">
               <h3 class="card-header">{{ group.name }}</h3>
@@ -12,10 +17,35 @@
               </div>
         </li>
       </ul>
-      <div class="group-management" #elseBlock>
-        Grop manamgenet section
+
+      
+
+      <div class="group-management" *ngIf="viewGroupControls">
+        <!-- Block handling the user group creations and registrations -->
+        <h2 class="section-header">Join an existing group</h2>
+        <form (submit)="onJoinGroupSubmit()">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="Group Code">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Join"> 
+        </form>
+        <br>
+        <h2 class="section-header">Create a new group</h2>
+        <form (submit)="onCreateGroupSubmit()">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="Group name">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="PRIVATE CHECKBOX">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="GROUP DESCRIPTION">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Create"> 
+        </form>
       </div>
 
+      <h1 class="section-title" id="profile-title">Profile</h1>
       <div id="user-profile">
           <app-profile></app-profile>
       </div>
