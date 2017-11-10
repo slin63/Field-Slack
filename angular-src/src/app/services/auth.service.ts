@@ -16,6 +16,10 @@ export class AuthService {
     private http: Http
   ) { }
 
+  getUser() {
+    return this.user;
+  }
+
   // Registrations
   registerUser(user) {
     const headers = new Headers();

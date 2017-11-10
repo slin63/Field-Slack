@@ -14,12 +14,52 @@ export class UsergroupService {
 
   // Get all a user's usergroups
   getUserGroups() {
+    const headers = this._getAuthHeader();
+
+    return this.http.get(
+      environment.api_url + 'users/usergroups', 
+      { headers: headers })
+      .map(res => res.json());
+  }
+
+  createUserGroup(name: String, description: String, is_private = false) {
+    const headers = this._getAuthHeader();
+    const data = {
+      name: name,
+      description: description,
+      is_private: is_private
+    }
+
+    return this.http.post(
+      environment.api_url + 'usergroups/create',
+      data,
+      { headers: headers })
+      .map(res => res.json());
+  }
+
+  joinUserGroup(userGroupCode: String, role = 'standard') {
+    const headers = this._getAuthHeader();
+    const data = { // Becomes req.body in the POST 
+      user_group_code: userGroupCode,
+      role: role
+    };
+
+    return this.http.post(
+      environment.api_url + 'usergroups/join',
+      data, 
+      { headers: headers })
+      .map(res => res.json());
+  }
+
+  _getAuthHeader(): Headers {
     const headers = new Headers();
     const token = localStorage.getItem('id_token');
 
     headers.append('Authorization', token);
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get(environment.api_url + 'users/usergroups', {headers: headers}).map(res => res.json());
+    return headers;
   }
+
 }
+

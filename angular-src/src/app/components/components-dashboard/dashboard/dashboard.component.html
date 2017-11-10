@@ -9,39 +9,55 @@
       <ul id="user-group-list" *ngIf="viewGroups">
         <li *ngFor="let group of usergroups">
             <div class="card text-white mb-3 d-inline-block">
-              <h3 class="card-header">{{ group.name }}</h3>
+              <h3 class="card-header row">
+                  <div class="col-md-6">{{ group.name }}</div>
+                  <div class="col-md-6 text-right text-small"><code>{{ group.user_group_code }}</code></div>
+              </h3>
                 <div class="card-body">
-                  <h6 class="card-title">{{ group.user_group_code }}</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the loremm70 card's content.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                          {{ group.description }}
+                        </div>
+                        <div class="col-md-6 text-right">
+                          Number of Members: {{ group.users.length }}
+                        </div>
+                    </div>
+                  <!-- <p class="text-left">LEFT TEXT</p>
+                  <p class="text-right">LEFT RIGHT</p> -->
+                  <!-- <h6 class="card-title">{{ group.user_group_code }}</h6>
+                  <p class="card-text">{{ group.description }}.</p> -->
                 </div>
               </div>
         </li>
       </ul>
-
-      
 
       <div class="group-management" *ngIf="viewGroupControls">
         <!-- Block handling the user group creations and registrations -->
         <h2 class="section-header">Join an existing group</h2>
         <form (submit)="onJoinGroupSubmit()">
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="Group Code">
+            <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="Group Code (e.g. sK4gjZ)">
           </div>
           <input type="submit" class="btn btn-primary" value="Join"> 
         </form>
         <br>
         <h2 class="section-header">Create a new group</h2>
         <form (submit)="onCreateGroupSubmit()">
-          <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="Group name">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="PRIVATE CHECKBOX">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="userGroupCode" name="userGroupCode" placeholder="GROUP DESCRIPTION">
-          </div>
-          <input type="submit" class="btn btn-primary" value="Create"> 
+            <fieldset>
+                <div class="form-group">
+                  <input class="form-control" id="exampleInputPassword1" placeholder="Group Name" name="name" [(ngModel)]="name" type="text">
+                </div>
+                <div class="form-group">
+                    <textarea [(ngModel)]="description" name="description" class="form-control" placeholder="Tell us what your group does!" rows="3"></textarea>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" name="private" [(ngModel)]="private" type="checkbox">
+                    Make this a private group.
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+              </fieldset> 
         </form>
       </div>
 

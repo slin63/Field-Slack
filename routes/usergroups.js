@@ -45,6 +45,7 @@ router.post('/join', passport.authenticate('jwt', {session:false}), (req, res, n
 router.post('/create', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     const newUserGroup = new UserGroup({
         name: req.body.name,
+        description: req.body.description,
         is_private: req.body.is_private
     });
     

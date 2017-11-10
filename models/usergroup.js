@@ -17,6 +17,9 @@ const UserGroupSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String
+    },
     users: [{
         userID: {
             type: String

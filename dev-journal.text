@@ -1,10 +1,22 @@
 Service -> Hits API server for DB Info
 
+When you ge tbacl:
+    Whats the deal with .subscribe()? The POST stuff is still weird
+
 Model Changes:
     - Usergroup needs a description section
 
-Dashboard: (API: done) (UI: not started) (services: not started)
-    - UI 
+Dashboard: (API: done) (UI: done) (services: WIP)
+    
+    - Services
+        - getUserGroups -> DONE
+        - createUserGroup -> TESTING
+        - joinUserGroup
+        
+    - API -> DONE
+        - getUserUserGroups -> DONE
+        
+    - UI -> DONE
         - Use ELEMENT:nth-child(odd) in CSS to get alternating colors for userGroups in dashboard view
         - Create new user group 
             - Register new user_group and supply user_group details
@@ -14,10 +26,6 @@ Dashboard: (API: done) (UI: not started) (services: not started)
         - Join user group
             - (if notRegistered): Register new user with work email
             - Provide link or registration code for people looking to join user_group
-    - Services
-        
-    - API -> DONE
-        - getUserUserGroups -> DONE
         
     
 Usergroup API: (outlined)
