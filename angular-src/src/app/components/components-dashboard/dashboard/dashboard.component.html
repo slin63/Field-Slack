@@ -8,26 +8,24 @@
       </div>
       <ul id="user-group-list" *ngIf="viewGroups">
         <li *ngFor="let group of usergroups">
-            <div class="card text-white mb-3 d-inline-block">
-              <h3 class="card-header row">
-                  <div class="col-md-6">{{ group.name }}</div>
-                  <div class="col-md-6 text-right text-small"><code>{{ group.user_group_code }}</code></div>
-              </h3>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                          {{ group.description }}
-                        </div>
-                        <div class="col-md-6 text-right">
-                          Number of Members: {{ group.users.length }}
-                        </div>
-                    </div>
-                  <!-- <p class="text-left">LEFT TEXT</p>
-                  <p class="text-right">LEFT RIGHT</p> -->
-                  <!-- <h6 class="card-title">{{ group.user_group_code }}</h6>
-                  <p class="card-text">{{ group.description }}.</p> -->
+            <a class="card-link" href="/{{ group.name }}">
+              <div class="card text-white mb-3 d-inline-block">
+                <h3 class="card-header row">
+                    <div class="col-md-6">{{ group.name }}</div>
+                    <div class="col-md-6 text-right text-small"><code>{{ group.user_group_code }}</code></div>
+                </h3>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-md-6">
+                            {{ group.description }}
+                          </div>
+                          <div class="col-md-6 text-right">
+                            Number of Members: {{ group.users.length }}
+                          </div>
+                      </div>
                 </div>
               </div>
+            </a>
         </li>
       </ul>
 

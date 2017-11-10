@@ -1,8 +1,5 @@
 Service -> Hits API server for DB Info
 
-When you ge tbacl:
-    Whats the deal with .subscribe()? The POST stuff is still weird
-
 Model Changes:
     - Usergroup needs a description section
 
@@ -10,8 +7,8 @@ Dashboard: (API: done) (UI: done) (services: WIP)
     
     - Services
         - getUserGroups -> DONE
-        - createUserGroup -> TESTING
-        - joinUserGroup
+        - createUserGroup -> DONE
+        - joinUserGroup -> DONE
         
     - API -> DONE
         - getUserUserGroups -> DONE

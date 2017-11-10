@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   loginView: boolean;
   registerView: boolean;
-  gitURL: String;
 
   constructor(
     private authService: AuthService,
@@ -25,7 +24,6 @@ export class HomeComponent implements OnInit {
     if (this.authService.loggedIn()) {
       this.router.navigate(['/dashboard']);
     }
-    this.gitURL = environment.git_url;
   }
 
   onLoginClick() {

@@ -19,6 +19,8 @@ import { AuthService } from './services/auth.service';
 import { UsergroupService } from './services/usergroup.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
+import { BottomBarComponent } from './components/components-nav/bottom-bar/bottom-bar.component';
+import { GroupHomeComponent } from './components/components-groups/landing/group-home/group-home.component';
 
 const appRoutes: Routes = [
   {
@@ -38,6 +40,11 @@ const appRoutes: Routes = [
     path: 'profile', component: ProfileComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: '/groups/:user_group_code', component: GroupHomeComponent,
+    canActivate: [AuthGuard]
+  },
+  
 ]
 
 
@@ -50,7 +57,9 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     DashboardComponent,
-    LandingLoginComponent
+    LandingLoginComponent,
+    BottomBarComponent,
+    GroupHomeComponent
   ],
   imports: [
     BrowserModule,
