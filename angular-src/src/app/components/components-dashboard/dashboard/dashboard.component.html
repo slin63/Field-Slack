@@ -8,7 +8,7 @@
       </div>
       <ul id="user-group-list" *ngIf="viewGroups">
         <li *ngFor="let group of usergroups">
-            <a class="card-link" href="/{{ group.name }}">
+            <a class="card-link" [routerLink]="['/groups', group.user_group_code]">
               <div class="card text-white mb-3 d-inline-block">
                 <h3 class="card-header row">
                     <div class="col-md-6">{{ group.name }}</div>

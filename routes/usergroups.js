@@ -75,9 +75,9 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
     });
 });
 
-// POST to get Usergroup info by groupcode
-router.post('/usergroup', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    UserGroup.getUserGroupByUserGroupCode(req.body.user_group_code, (err, userGroup) => {
+// GET to get Usergroup info by groupcode using params arg for $http.get()
+router.get('/usergroup', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    UserGroup.getUserGroupByUserGroupCode(req.query.user_group_code, (err, userGroup) => {
         if (err) {
             res.json( { success: false, msg: 'Failed to get Usergroup.' } );
         } else {

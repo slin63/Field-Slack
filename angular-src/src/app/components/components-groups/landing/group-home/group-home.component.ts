@@ -11,18 +11,25 @@ import { UsergroupService } from '../../../../services/usergroup.service';
 })
 export class GroupHomeComponent implements OnInit {
   userGroupCode: String;
+  userGroup: Object;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userGroupService: UsergroupService;
+    private userGroupService: UsergroupService
   ) { }
 
   ngOnInit() {
-    this.userGroupCode = this.route.paramMap
-      .switchmap((params: ParamMap) => {
-        this.userGroupService.getUserGroup(params.get('user_group_code'));
-      });
-  }
+    this.route.params.subscribe(params => {
+      this.userGroupCode = params.user_group_code;
+      console.log(params.user_group_code);
 
+      this.userGroupService.getUserGroupByUserGroupCode(this.userGroupCode)
+      .subscribe(res => {
+        this.userGroup = res.user_group;
+      });
+    });
+
+  }
 }
+

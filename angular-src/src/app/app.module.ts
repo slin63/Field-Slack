@@ -41,12 +41,10 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '/groups/:user_group_code', component: GroupHomeComponent,
+    path: 'groups/:user_group_code', component: GroupHomeComponent,
     canActivate: [AuthGuard]
-  },
-  
+  }
 ]
-
 
 @NgModule({
   declarations: [

@@ -22,6 +22,22 @@ export class UsergroupService {
       .map(res => res.json());
   }
 
+  getUserGroupByUserGroupCode(userGroupCode: String) {
+    const headers = this._getAuthHeader();
+    const data = {
+      user_group_code: userGroupCode
+    };
+    const config = {
+      params: data,
+      headers: headers
+    };
+
+    return this.http.get(
+      environment.api_url + 'usergroups/usergroup',
+      config
+    ).map(res => res.json());
+  }
+
   createUserGroup(name: String, description: String, is_private = false) {
     const headers = this._getAuthHeader();
     const data = {

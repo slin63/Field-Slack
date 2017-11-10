@@ -1,10 +1,18 @@
 Service -> Hits API server for DB Info
 
+
 Model Changes:
     - Usergroup needs a description section
 
+Group-home landing page:
+    - Services
+        - Get user group by user group code -> DONE
+
+    - API
+
+    - UI
+
 Dashboard: (API: done) (UI: done) (services: WIP)
-    
     - Services
         - getUserGroups -> DONE
         - createUserGroup -> DONE
@@ -46,6 +54,10 @@ Landing Page: (mostly done)
     - Combined login/registration component
         - Same as current login component, but with a registration button next to the login button
         - Redirects you to register form with your proposed username/password filled out for you
+
+
+COMMON MISTAKES:
+    Always map response objects from $http.post etc as .json(). Otherwise they're unreadable.
 
 
 KNOWN BUGS:
