@@ -25,7 +25,7 @@ export class GroupHomeComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userGroupCode = params.user_group_code;
-      console.log(params.user_group_code);
+      // console.log(params.user_group_code);
 
       this.userGroupService.getUserGroupByUserGroupCode(this.userGroupCode)
       .subscribe(res => {
@@ -33,7 +33,7 @@ export class GroupHomeComponent implements OnInit {
       });
     });
 
-    this.user = this.authService.getUser();
+    this.user = JSON.parse(localStorage.getItem('user'));
 
   }
 }

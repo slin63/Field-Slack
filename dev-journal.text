@@ -1,5 +1,7 @@
 Service -> Hits API server for DB Info
 
+Just realized you can access user information through localstorage.
+ I'm dumb.
 
 
 Model Changes:
