@@ -1,0 +1,36 @@
+#chat-container {
+    display: grid;
+    position: absolute;
+     /* top: 0; right: 0; bottom: 0; left: 0; */
+    height: 100%;
+    width: 100%;
+    grid-gap: 0em;
+    padding: 0 0;
+    grid-template-columns: 2fr 5fr;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+#chat-bar {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1/6;
+
+    background-color: darkslategrey;
+    color: rgb(200, 200, 200);
+    padding: 0.5em;
+}
+
+#chat-window {
+    display: grid;
+    grid-column: 2;
+
+    background-color: rgb(120, 116, 144);
+    grid-row: 1/6;
+}
+
+#options-header {
+    color: mintcream;
+    padding: 0px;
+    width: auto;
+    font-size: 25px;
+}

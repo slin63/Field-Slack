@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { UsergroupService } from '../../../../services/usergroup.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-group-home',
@@ -12,11 +13,13 @@ import { UsergroupService } from '../../../../services/usergroup.service';
 export class GroupHomeComponent implements OnInit {
   userGroupCode: String;
   userGroup: Object;
+  user: Object;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userGroupService: UsergroupService
+    private userGroupService: UsergroupService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -29,6 +32,8 @@ export class GroupHomeComponent implements OnInit {
         this.userGroup = res.user_group;
       });
     });
+
+    this.user = this.authService.getUser();
 
   }
 }

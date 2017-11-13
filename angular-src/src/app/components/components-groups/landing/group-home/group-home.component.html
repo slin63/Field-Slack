@@ -1,6 +1,31 @@
-<div class="container">
-  {{ userGroupCode }}
-  <div *ngIf="userGroup">
-    {{ userGroup.name }}
+<div id="chat-container">
+
+  <div id="chat-bar">
+    <div *ngIf="userGroup">
+     <ul class="nav nav-pills">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="options-header" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              {{ userGroup.name }}    
+            </a>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+
+            <div *ngIf="user">
+              {{ user.username }}
+            </div>
+            
+          </li>
+     </ul>
+    </div>
   </div>
+
+  <div id="chat-window">
+    {{ userGroupCode }}
+  </div>
+
 </div>

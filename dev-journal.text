@@ -1,10 +1,14 @@
 Service -> Hits API server for DB Info
 
 
+
 Model Changes:
     - Usergroup needs a description section
 
 Group-home landing page:
+    - Need to prevent page from rendering until all data is gotten.
+        - see: https://shermandigital.com/blog/wait-for-data-before-rendering-views-in-angular-2/
+    
     - Services
         - Get user group by user group code -> DONE
 
