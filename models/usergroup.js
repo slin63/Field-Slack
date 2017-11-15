@@ -25,6 +25,10 @@ const UserGroupSchema = mongoose.Schema({
             type: String
         },
         role: String
+    }],
+    channels: [{
+        channelID: String,
+        name: String
     }]
 });
 

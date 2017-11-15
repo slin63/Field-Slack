@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
+import { Roles, roleDict } from '../../../../constants/constants';
 import { UsergroupService } from '../../../../services/usergroup.service';
 import { AuthService } from '../../../../services/auth.service';
 
@@ -12,8 +13,11 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class GroupHomeComponent implements OnInit {
   userGroupCode: String;
-  userGroup: Object;
-  user: Object;
+  userGroup: any;
+
+  user: any;
+  userRole: Roles;
+  userRoleString: String;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,11 +34,17 @@ export class GroupHomeComponent implements OnInit {
       this.userGroupService.getUserGroupByUserGroupCode(this.userGroupCode)
       .subscribe(res => {
         this.userGroup = res.user_group;
+
+        // Get the user and find out what their role is
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this._setUserRole(this.userGroup, this.user.id);
       });
     });
+  }
 
-    this.user = JSON.parse(localStorage.getItem('user'));
-
+  _setUserRole(userGroup, userID: String): void {
+    this.userRole = this.userGroupService.getUserRole(this.userGroup, this.user.id);
+    this.userRoleString = this.userGroupService.roleAsString(this.userRole);
   }
 }
 

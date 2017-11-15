@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { Roles, roleDict } from '../constants/constants';
 
 import { tokenNotExpired } from 'angular2-jwt';
 
@@ -65,6 +66,20 @@ export class UsergroupService {
       data, 
       { headers: headers })
       .map(res => res.json());
+  }
+
+  roleAsString(role: Roles): String {
+    return Roles[role];
+  }
+
+  getUserRole(userGroup, userID): Roles {
+    for (const user of userGroup.users) {
+      if (user.userID === userID) {
+        const roleEnum = roleDict[user.role];
+        return roleEnum;
+      }
+    }
+    return null;
   }
 
   _getAuthHeader(): Headers {
