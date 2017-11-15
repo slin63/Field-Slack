@@ -8,11 +8,8 @@
               {{ userGroup.name }}    
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
+              <a class="dropdown-item" *ngIf="_userIsAdmin()" 
+              [routerLink]="['/groups', userGroupCode, userGroup.name, 'admin']">Manage Group</a>
             </div>
 
             <div *ngIf="user">

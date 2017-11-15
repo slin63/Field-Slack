@@ -46,10 +46,12 @@ require('./config/passport')(passport);
 // Routers
 const users = require('./routes/users');
 const usergroups = require('./routes/usergroups');
+const channels = require('./routes/channels');
 
 // Any URL based on '/users/*' files pointed to by users
 app.use('/users', users);
 app.use('/usergroups', usergroups);
+app.use('/channels', channels);
 
 // Index Route
 app.get('/', (req, res) => {

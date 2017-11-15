@@ -7,7 +7,7 @@ const ChannelSchema = mongoose.Schema({
     name: {
         type: String,
     },
-    password: {
+    description: {
         type: String,
         required: true,
     },

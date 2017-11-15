@@ -39,6 +39,23 @@ export class UsergroupService {
     ).map(res => res.json());
   }
 
+  getUserGroupChannels(userGroupCode: String) {
+    const headers = this._getAuthHeader();
+    const data = {
+      user_group_code: userGroupCode
+    };
+    const config = {
+      params: data,
+      headers: headers
+    };
+
+    return this.http.get(
+      environment.api_url + 'channels/usergroup_channels',
+      config
+    ).map(res => res.json());
+  }
+
+
   createUserGroup(name: String, description: String, is_private = false) {
     const headers = this._getAuthHeader();
     const data = {
@@ -63,7 +80,7 @@ export class UsergroupService {
 
     return this.http.post(
       environment.api_url + 'usergroups/join',
-      data, 
+      data,
       { headers: headers })
       .map(res => res.json());
   }
@@ -80,6 +97,16 @@ export class UsergroupService {
       }
     }
     return null;
+  }
+
+  setLocalStorageToUsergroup(userGroupCode: String, userGroup): void {
+    localStorage.setItem('user_group', JSON.stringify(userGroup));
+    localStorage.setItem('user_group_code', userGroupCode.toString());
+  }
+
+  clearLocalStorageOfUsergroup(): void {
+    localStorage.removeItem('user_group');
+    localStorage.removeItem('user_group_code');
   }
 
   _getAuthHeader(): Headers {

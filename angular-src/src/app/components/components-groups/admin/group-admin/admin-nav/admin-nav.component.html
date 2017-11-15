@@ -1,0 +1,13 @@
+<div class="nav-grid">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="[{ outlets: { sub: ['channels'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Channels</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="[{ outlets: { sub: ['users'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="[{ outlets: { sub: ['permissions'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Permissions</a>
+    </li>
+  </ul>
+</div>

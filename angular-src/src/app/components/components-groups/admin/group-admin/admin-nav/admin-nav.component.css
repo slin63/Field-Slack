@@ -1,0 +1,10 @@
+.nav-pills {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+}
+
+.nav-pills li {
+    justify-self: center;
+    text-align: center;
+}

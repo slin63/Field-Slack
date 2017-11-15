@@ -1,0 +1,27 @@
+
+#page-header {
+    padding: 0.2em;
+}
+
+#admin-page {
+    display: grid;
+
+    position: absolute;
+    /* top: 0; right: 0; bottom: 0; left: 0; */
+    height: 100%;
+    width: 100%;
+    grid-gap: 0em;
+    padding: 0px;
+    margin: 0px;
+
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.list-group {
+    grid-row: 1;
+}

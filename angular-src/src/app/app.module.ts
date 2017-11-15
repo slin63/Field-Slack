@@ -12,6 +12,11 @@ import { RegisterComponent } from './components/components-user/register/registe
 import { ProfileComponent } from './components/components-user/profile/profile.component';
 import { DashboardComponent } from './components/components-dashboard/dashboard/dashboard.component';
 import { LandingLoginComponent } from './components/components-landing/landing-login/landing-login.component';
+import { BottomBarComponent } from './components/components-nav/bottom-bar/bottom-bar.component';
+import { GroupHomeComponent } from './components/components-groups/landing/group-home/group-home.component';
+import { GroupAdminComponent } from './components/components-groups/admin/group-admin/group-admin.component';
+import { AdminNavComponent } from './components/components-groups/admin/group-admin/admin-nav/admin-nav.component';
+import { ChannelsMgmtComponent } from './components/components-groups/admin/group-admin/channels-mgmt/channels-mgmt.component';
 
 import { LocalService } from './services/local.service';
 import { ValidateService } from './services/validate.service';
@@ -19,8 +24,6 @@ import { AuthService } from './services/auth.service';
 import { UsergroupService } from './services/usergroup.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
-import { BottomBarComponent } from './components/components-nav/bottom-bar/bottom-bar.component';
-import { GroupHomeComponent } from './components/components-groups/landing/group-home/group-home.component';
 
 const appRoutes: Routes = [
   {
@@ -43,6 +46,18 @@ const appRoutes: Routes = [
   {
     path: 'groups/:user_group_code', component: GroupHomeComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'groups/:user_group_code/:user_group/admin', component: GroupAdminComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'channels',
+        component: ChannelsMgmtComponent,
+        canActivate: [AuthGuard],
+        outlet: 'sub'
+      }
+    ]
   }
 ]
 
@@ -57,7 +72,10 @@ const appRoutes: Routes = [
     DashboardComponent,
     LandingLoginComponent,
     BottomBarComponent,
-    GroupHomeComponent
+    GroupHomeComponent,
+    GroupAdminComponent,
+    AdminNavComponent,
+    ChannelsMgmtComponent
   ],
   imports: [
     BrowserModule,

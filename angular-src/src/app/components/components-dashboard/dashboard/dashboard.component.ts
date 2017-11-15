@@ -33,6 +33,9 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // If you're back at the dashboard, you're not using a group anymore.
+    // Therefore: clear local storage of group info
+    this.usergroupService.clearLocalStorageOfUsergroup();
     this.refreshGroupMenu();
     this.user = this.authService.getUser();
   }

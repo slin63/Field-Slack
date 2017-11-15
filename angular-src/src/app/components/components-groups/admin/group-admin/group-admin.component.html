@@ -1,0 +1,18 @@
+
+
+  <h1 id="page-header" *ngIf=userGroup class="text-center">{{ userGroup.name }} Admin Page</h1>
+
+  <div id="admin-page">
+
+    <!-- https://stackoverflow.com/questions/41857876/angular-2-submodule-routing-and-nested-router-outlet -->
+    <!-- Sub-navbar -->
+    <div class="center" id="sub-nav">
+      <app-admin-nav></app-admin-nav>
+    </div>
+
+    <router-outlet class="center">
+      <router-outlet name='sub'></router-outlet>
+    </router-outlet>
+    
+  </div>
+  

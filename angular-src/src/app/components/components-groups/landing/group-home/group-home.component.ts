@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Roles, roleDict } from '../../../../constants/constants';
@@ -38,6 +38,9 @@ export class GroupHomeComponent implements OnInit {
         // Get the user and find out what their role is
         this.user = JSON.parse(localStorage.getItem('user'));
         this._setUserRole(this.userGroup, this.user.id);
+
+        // Set the local storage.
+        this.userGroupService.setLocalStorageToUsergroup(this.userGroupCode, this.userGroup);
       });
     });
   }
@@ -45,6 +48,10 @@ export class GroupHomeComponent implements OnInit {
   _setUserRole(userGroup, userID: String): void {
     this.userRole = this.userGroupService.getUserRole(this.userGroup, this.user.id);
     this.userRoleString = this.userGroupService.roleAsString(this.userRole);
+  }
+
+  _userIsAdmin(): boolean {
+    return (this.userRole === Roles.admin);
   }
 }
 

@@ -16,9 +16,11 @@ Model Changes:
 Admin-tab with MODALS:
     - Put dropdown tab into its own component.
     - Admin options:
-        - Admins can create channels, delete channels, and manage group applications (if private)
-        - On creation/modification of channels, need to refresh parent component
-            - https://stackoverflow.com/questions/40282646/angular-2-one-component-trigger-refresh-of-another-component-on-the-page
+        - Channels
+            - Create / Delete Channels 
+            - UI -> Need to add list ofexisting channels
+            - API -> Still need add / remove channel functions
+                - API working to retrieve channels from group
 
 
 Group-home landing page:
