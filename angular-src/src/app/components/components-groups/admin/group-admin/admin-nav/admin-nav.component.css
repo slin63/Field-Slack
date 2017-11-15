@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
+    margin-bottom:  0.2em;
 }
 
 .nav-pills li {

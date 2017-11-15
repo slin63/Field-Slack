@@ -1,7 +1,19 @@
 <div class="container">
-  <h2 class="page-header">Manage Channels</h2>
+  <h2 class="page-header text-center">Manage Channels</h2>
 
   <!-- List of current channels in the group, with delete / edit buttons next to them -->
+
+  <ul class="list-group" id="channel-list" *ngIf=channels>
+    <li class="list-group-item" *ngFor="let channel of channels">
+      <p class="channel-info">
+        <i>{{ channel.name }}:</i> <small class="text-muted">{{ channel.description }}</small> OVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOWOVERFLOW
+      </p> 
+      <p class="channel-buttons">
+          <button type="button" class="btn btn-success" id="edit-button">Edit</button>
+      </p>
+      
+    </li>
+  </ul>
 
   <form (submit)="onCreateChannelSubmit()">
     <div class="form-group">

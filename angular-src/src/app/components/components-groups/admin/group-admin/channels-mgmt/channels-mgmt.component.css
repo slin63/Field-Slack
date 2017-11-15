@@ -1,0 +1,27 @@
+#channel-list {
+    margin-bottom: 10px;
+}
+
+#channel-list li {
+    display: grid;
+    grid-template-columns: 5fr, 2fr;
+    grid-column-gap: 0.2em;
+}
+
+.channel-info {
+    margin: 0px;
+    grid-column: 1;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+
+/* https://stackoverflow.com/questions/44207311/how-to-use-grid-row-align-and-grid-column-align */
+.channel-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    grid-column: 2;
+}

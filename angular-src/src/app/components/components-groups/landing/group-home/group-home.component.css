@@ -32,5 +32,7 @@
     color: mintcream;
     padding: 0px;
     width: auto;
-    font-size: 35px;
+    font-size: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
