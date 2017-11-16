@@ -7,13 +7,7 @@ Unit Tests:
     - Write unit tests for the Express API.
     - Granular really likes people who do unit tests.
 
-Model Changes:
-    - Usergroup needs a description section -> DONE
-    - Usergroup needs array of channels -> DONE
-        - Channels should be their own objects. -> DONE
-        - Will handle storing message data. -> DONE
-
-Admin-tab with MODALS:
+Group-Admin Page:
     - Put dropdown tab into its own component.
     - Admin options:
         - Channels
@@ -21,6 +15,10 @@ Admin-tab with MODALS:
             - UI -> Need to add list ofexisting channels
             - API -> Still need add / remove channel functions
                 - API working to retrieve channels from group
+                - API to create a group NEEDS TESTING
+            - Service -> Need to add channel create service
+                - Write unit tests in Jasmine as you write the service.
+
 
 
 Group-home landing page:

@@ -18,3 +18,8 @@ const ChannelSchema = mongoose.Schema({
 });
 
 const Channel = module.exports = mongoose.model('Channel', ChannelSchema);
+
+
+module.exports.addChannel = function(newChannel, userGroupCode, callback) {
+    newChannel.save(callback);
+}

@@ -13,6 +13,9 @@ export class ChannelsMgmtComponent implements OnInit {
   userGroupCode: String;
   userGroup: Object;
 
+  channelName: String;
+  channelDescription: String;
+
   constructor(
     private userGroupService: UsergroupService
   ) { }
@@ -26,6 +29,11 @@ export class ChannelsMgmtComponent implements OnInit {
       this.channels = res.channels;
       console.log(res);
     });
+  }
+
+  onCreateChannelSubmit() {
+    console.log(this.channelName);
+    console.log(this.channelDescription);
   }
 
 }

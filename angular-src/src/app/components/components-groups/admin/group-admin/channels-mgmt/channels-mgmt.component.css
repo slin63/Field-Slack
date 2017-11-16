@@ -4,13 +4,18 @@
 
 #channel-list li {
     display: grid;
-    grid-template-columns: 5fr, 2fr;
+    grid-template-columns: 6fr, 1fr;
     grid-column-gap: 0.2em;
+    padding: .6em;
 }
 
 .channel-info {
     margin: 0px;
     grid-column: 1;
+
+    display: flex;
+    
+    align-items: center;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -20,7 +25,7 @@
 /* https://stackoverflow.com/questions/44207311/how-to-use-grid-row-align-and-grid-column-align */
 .channel-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     margin: 0px;
     grid-column: 2;
