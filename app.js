@@ -59,6 +59,15 @@ server.use('/users', users);
 server.use('/usergroups', usergroups);
 server.use('/channels', channels);
 
+
+// Check if we're running tests before enabling verbose error logging
+if (process.env.NODE_ENV == 'test') {    
+    server.use(function (err, req, res, next) {
+        console.error(err.stack)
+        res.status(500).send('Something broke!')
+    });
+}
+
 // Index Route
 server.get('/', (req, res) => {
     res.send('Invalid Endpoint');

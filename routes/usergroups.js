@@ -65,7 +65,7 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
                         if (err) {
                             res.json( { success: false, msg: 'Failed to add UserGroup to user.' } );  
                         } else {
-                            res.json( { success: true, msg: 'Usergroup saved. ' + req.user.username + ' added to group as admin. UserGroup added to ' + req.user.username + '\'s groups.'} );
+                            res.json( { success: true, msg: 'Usergroup saved. ' + req.user.username + ' added to group as admin. UserGroup added to ' + req.user.username + '\'s groups.', user_group: userGroup} );
                         }
                     })
                     

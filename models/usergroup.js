@@ -78,15 +78,36 @@ module.exports.addChannelToUserGroup = function(userGroupCode, newChannel, callb
     const query = { user_group_code: userGroupCode };
     const doc = {
         $push: {
-            'channels': {
+            channels: {
                 channelID: newChannel._id,
                 name: newChannel.name,
                 description: newChannel.description
             }
         }
     }
+    // You need to specify NEW : TRUE or else it returns the old object.
+    const options =  {
+        safe: true, upsert: true, new : true
+    }
 
-    UserGroup.findOneAndUpdate(query, doc, {}, callback);
+    UserGroup.findOneAndUpdate(query, doc, options, callback);
+}
+
+module.exports.removeChannelFromUserGroup = function(userGroupCode, channelID) {
+    const query = { user_group_code: userGroupCode };
+    const doc = {
+        $pull: {
+            channels: {
+                channelID: channelID
+            }
+        }
+    }
+    // You need to specify NEW : TRUE or else it returns the old object.
+    const options =  {
+        safe: true, upsert: true, new : true
+    }
+
+    return UserGroup.findOneAndUpdate(query, doc, options).exec();
 }
 
 module.exports.UserInGroup = function(user, userGroupCode, callback) {
@@ -97,3 +118,4 @@ module.exports.UserInGroup = function(user, userGroupCode, callback) {
 
     UserGroup.findOne(query, callback);
 }
+

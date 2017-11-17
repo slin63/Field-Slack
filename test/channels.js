@@ -17,66 +17,146 @@ let should = chai.should();
 chai.use(chaiHttp);
 chai.use(chaiAsPromised);
 
+// example file:
+// https://github.com/mjhea0/node-mocha-chai-tutorial/blob/master/test/test-server.js
 // https://stackoverflow.com/questions/37284600/how-to-test-a-node-api-that-uses-jwt-authentication-with-user-login-to-get-toke
 // https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
 
 
 describe('ChannelTests', () => {
+    var token = '';
+    var user_group_code = '';
+    var channel_id = '';
     // Before:
     //  Declare auth token for later tests
     //  Create user, usergroup
-
     before((done) => {
-        var token = '';
         testUser = {
             name: 'testName',
             email: 'testEmail@g.edu',
             username: 'testUsername',
             password: 'testPW'
         }
-        
+        testUserGroup = {
+            name: 'testGroup',
+            description: 'testDescription',
+            is_private: 'isPrivate'
+        }
+        // Register the user
         chai.request(server)
-        .post('/users/register')
-        .send(testUser)
-        .end((err, res) => {
-            // console.log('NEXT');
-            expect(res).status.should.equal(200);
-            chai.request(server)
-            .post('/users/authenticate')
+            .post('/users/register')
             .send(testUser)
-            .end( (err, res) => {
-                token = res.body.token;
-                res.status.should.equal(200);
-                done();
-            });
-        });
+            
+        // Authenticate the user
+        .then( (res) => { 
+            expect(res).to.have.status(200);
+
+            return chai.request(server) // Return this for the next .then()
+                .post('/users/authenticate')
+                .send(testUser)
+        })
+
+        // Save their token, create userGroup with JWT token
+        .then( (res) => {
+            expect(res).to.have.status(200);
+            expect(res.body.token).to.be.not.null;
+            token = res.body.token;
+            
+            return chai.request(server)
+                .post('/usergroups/create')
+                .set('Authorization', token)
+                .send(testUserGroup)
+        })
+
+        // Check that the usergroup creation succeeded and save the user group code. Call done()
+        .then( (res) => {
+            expect(res).to.have.status(200);
+            expect(res.body.user_group).to.be.not.null;
+            user_group_code = res.body.user_group.user_group_code;
+            done();
+        })
+
+        .catch( (err) => {
+            throw err;
+            done();
+        })
     });
 
     beforeEach((done) => {
-        Channel.remove({}, (err) => { 
-            done();
-        });
+        done();
     });
 
-    describe('/POST channel', () => {
-        it('should create a new channel', (done) => {
-            let newChannel = {
-                name: "TestChannel",
-                description: "TestDescription",
-                messages: []
-            }
-            console.log(token);
-            chai.request(server)
-                .post('/channels/create')
+    it('should add a new channel to user_group_code on /channels POST', (done) => {
+        let newChannel = {
+            name: "TestChannel",
+            description: "TestDescription",
+            user_group_code: user_group_code,
+            messages: []
+        }
+        chai.request(server)
+            .post('/channels')
+            .set('Authorization', token)
+            .send(newChannel)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('channel');
+                res.body.channel.user_group_code.should.be.eql(user_group_code);
+                res.body.should.have.property('user_group');
+                res.body.user_group.user_group_code.should.be.eql(user_group_code);
+                res.body.user_group.channels.should.have.length(1, "Channel not added to group!");
+                channel_id = res.body.channel._id;
+                done();
+            });
+    });
+
+    it('should get ALL a group\'s channels on /channels/usergroup_channels GET', (done) => {
+        let newChannel = {
+            name: "TestChannel2",
+            description: "TestDescription",
+            messages: [],
+            user_group_code: user_group_code
+        }
+        chai.request(server)
+            .post('/channels')
+            .set('Authorization', token)
+            .send(newChannel)
+        .then( (res) => {
+            expect(res).to.have.status(200);
+            
+            return chai.request(server)
+                .get('/channels/usergroup_channels')
                 .set('Authorization', token)
-                .send(newChannel)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('channel');
-                    done();
-                });
-        });
+                .query({ user_group_code: user_group_code })
+        })
+        .then( (res) => {
+            expect(res).to.have.status(200);
+            expect(res.body.channels).to.have.length(2);
+            done();
+        })
+        .catch( (err) => {
+            throw err;
+            done();
+        })
+    });
+
+    it('should delete a channel on /channels and delete that channel from the userGroup DELETE', (done) => {
+        query = {
+            user_group_code: user_group_code,
+            channel_id: channel_id
+        }
+        chai.request(server)
+            .del('/channels')
+            .set('Authorization', token)
+            .query(query)
+            .then( (res) => {
+                expect(res).to.have.status(200)
+                expect(res.body.user_group.channels).to.have.length(1);
+                done();
+            }) 
+            .catch( (err) => {
+                throw err;
+                done();
+            })
     });
 
 

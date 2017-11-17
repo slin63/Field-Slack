@@ -26,8 +26,14 @@ router.get('/usergroup_channels', passport.authenticate('jwt', {session:false}),
 // Add a channel to a user group::
     // First, create the new channel object.
     // Then add the channel object's ID, name, and description to the usergroup.
-router.post('/create', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    Channel.addChannel(req.body.new_channel, (err, newChannel) => {
+router.post('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const newChannel = new Channel({
+        name: req.body.name,
+        description: req.body.description,
+        messages: req.body.messages,
+        user_group_code: req.body.user_group_code
+    });
+    Channel.addChannel(newChannel, (err, newChannel) => {
         if (err) {
             res.json( { sucess: false, msg: 'Failed to create channel.'} );
         } else {
@@ -38,11 +44,34 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
                     res.json({
                         success: true,
                         channel: newChannel,
+                        user_group: userGroup,
                         msg: "Channel " + newChannel.name + " successfully added to " + userGroup.name + "!"
                     });
                 }
             });
         };
+    });
+});
+
+// Delete a channel given some ID and also remove the channel refernce from its parent usergroup
+router.delete('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.deleteChannel(req.query.channel_id)
+    .then((err, doc) => {
+        return UserGroup.removeChannelFromUserGroup(req.query.user_group_code, req.query.channel_id);
+    })
+    .then((userGroup, err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.json({
+                success: true,
+                user_group: userGroup,
+                msg: "Channel successfully deleted."
+            });
+        }
+    })
+    .catch((err) => {
+        throw err;
     });
 });
 
