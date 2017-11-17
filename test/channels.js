@@ -26,6 +26,7 @@ chai.use(chaiAsPromised);
 describe('ChannelTests', () => {
     var token = '';
     var user_group_code = '';
+    var channel_id_to_delete = '';
     var channel_id = '';
     // Before:
     //  Declare auth token for later tests
@@ -104,7 +105,7 @@ describe('ChannelTests', () => {
                 res.body.should.have.property('user_group');
                 res.body.user_group.user_group_code.should.be.eql(user_group_code);
                 res.body.user_group.channels.should.have.length(1, "Channel not added to group!");
-                channel_id = res.body.channel._id;
+                channel_id_to_delete = res.body.channel._id;
                 done();
             });
     });
@@ -121,6 +122,7 @@ describe('ChannelTests', () => {
             .set('Authorization', token)
             .send(newChannel)
         .then( (res) => {
+            channel_id = res.body.channel._id;
             expect(res).to.have.status(200);
             
             return chai.request(server)
@@ -139,10 +141,10 @@ describe('ChannelTests', () => {
         })
     });
 
-    it('should delete a channel on /channels and delete that channel from the userGroup DELETE', (done) => {
+    it('should delete a channel and delete that channel ref from the userGroup on /channels DELETE', (done) => {
         query = {
             user_group_code: user_group_code,
-            channel_id: channel_id
+            channel_id: channel_id_to_delete
         }
         chai.request(server)
             .del('/channels')
@@ -157,6 +159,31 @@ describe('ChannelTests', () => {
                 throw err;
                 done();
             })
+    });
+
+    it('should update a channel\'s description on /channels PATCH', (done) => {
+        const newDescription = "newDescription";
+        data = {
+            channel_id: channel_id,
+            channel_edits: {
+                description: newDescription
+            }
+        }
+        chai.request(server)
+            .put('/channels')
+            .set('Authorization', token)
+            .send(data)
+            .then( (res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('channel');
+                expect(res.body.channel.description).to.eql(newDescription);
+                expect(res.body.channel.user_group_code).to.eql(user_group_code);
+                done();
+            }) 
+            .catch( (err) => {
+                throw err;
+                done();
+            });
     });
 
 

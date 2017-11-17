@@ -76,4 +76,23 @@ router.delete('/', passport.authenticate('jwt', {session:false}), (req, res, nex
 });
 
 
+router.put('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.editChannel(req.body.channel_id, req.body.channel_edits)
+    .then((channel, err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.json({
+                success: true,
+                channel: channel,
+                msg: "Channel successfully updated."
+            })
+        }
+    })
+    .catch((err) => {
+        throw err;
+    })
+});
+
+
 module.exports = router;

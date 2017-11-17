@@ -33,3 +33,10 @@ module.exports.deleteChannel = function(channelID) {
     return Channel.findByIdAndRemove(channelID).exec();
 }
 
+module.exports.editChannel = function(channelID, channelEdits) {
+    const options = {
+        upsert: true,
+        new: true
+    }
+    return Channel.findByIdAndUpdate(channelID, channelEdits, options).exec();
+}

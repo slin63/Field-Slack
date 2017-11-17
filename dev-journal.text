@@ -3,9 +3,12 @@ Service -> Hits API server for DB Info
 Just realized you can access user information through localstorage.
 I'm dumb.
 
-Unit Tests:
-    - Write unit tests for the Express API.
-    - Granular really likes people who do unit tests.
+Unit Tests / TDD:
+    - Channel Unit Tests:
+        - [x] get all usergroup channels
+        - [x] add new channel
+        - [x] delete channel
+        - [x] edit channel
 
 Group-Admin Page:
     - Put dropdown tab into its own component.
