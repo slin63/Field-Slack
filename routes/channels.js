@@ -37,6 +37,7 @@ router.post('/create', passport.authenticate('jwt', {session:false}), (req, res,
                 } else {
                     res.json({
                         success: true,
+                        channel: newChannel,
                         msg: "Channel " + newChannel.name + " successfully added to " + userGroup.name + "!"
                     });
                 }

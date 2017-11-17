@@ -7,12 +7,22 @@ const mongoose = require('mongoose');
 const dbconfig = require('./config/database')
 const webconfig = require('./config/web')
 
+
+let port = webconfig.port;
+let db = dbconfig.database;
+
+// Check if we're running tests
+if (process.env.NODE_ENV == 'test') {
+    port = webconfig.port_test;
+    db = dbconfig.database_test;
+}
+
 // Connect to the MongoDB database via the configuration settings
-mongoose.connect(dbconfig.database)
+mongoose.connect(db)
 
 // On successful connection
 mongoose.connection.on('connected', () => {
-    console.log('Connected to database ' + dbconfig.database);
+    console.log('Connected to database ' + db);
 });
 
 // On connection error
@@ -20,25 +30,21 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error: ' + err);
 });
 
-const app = express();
-
-// Port number
-const port = webconfig.port;
-// const port = process.env.PORT || 8080; // For deployment to Heroku
+const server = express();
 
 // Cors Middleware
-app.use(cors());
+server.use(cors());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+server.use(express.static(path.join(__dirname, 'public')));
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }))
+server.use(bodyParser.json());
 
 // Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
+server.use(passport.initialize());
+server.use(passport.session());
 
 // Include the passport configuration
 require('./config/passport')(passport);
@@ -49,20 +55,22 @@ const usergroups = require('./routes/usergroups');
 const channels = require('./routes/channels');
 
 // Any URL based on '/users/*' files pointed to by users
-app.use('/users', users);
-app.use('/usergroups', usergroups);
-app.use('/channels', channels);
+server.use('/users', users);
+server.use('/usergroups', usergroups);
+server.use('/channels', channels);
 
 // Index Route
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.send('Invalid Endpoint');
 });
 
-app.get('*', (req, res) => {
+server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
 // Start Server
-app.listen(port, () => {
+server.listen(port, () => {
     console.log('Server started on port ' + port);
 });
+
+module.exports = server

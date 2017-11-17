@@ -21,7 +21,7 @@ router.post('/register', (req, res, next) => {
             res.json( { success: false, msg: 'Failed to register user.' } );
         }
         else {
-            res.json( { success: true, msg: 'User saved.' } );
+            res.json( { success: true, user: user, msg: 'User saved.' } );
         }
     });
 });

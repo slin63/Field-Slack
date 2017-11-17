@@ -4,17 +4,21 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ChannelsService } from './channels.service';
 
+import { HttpModule } from '@angular/http';
+
 describe('ChannelsService Isolated Unit Tests', () => {
-  let service: ChannelsService;
 
   beforeEach(() => {
-    service = new ChannelsService();
+    TestBed.configureTestingModule({
+      providers: [ChannelsService],
+      imports: [HttpModule]
+    })
   });
 
-  it('testFunction should return true', (done: DoneFn) => {
+  it('testFunction should return true', inject([ChannelsService], (service: ChannelsService) => {
     const testFunctionRes = service.testFunction()
     expect(testFunctionRes).toBe(true);
-    done();
-    });
-  });
-
+      }
+    )
+  );
+});
