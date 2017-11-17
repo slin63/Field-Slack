@@ -3,24 +3,30 @@ Service -> Hits API server for DB Info
 Just realized you can access user information through localstorage.
 I'm dumb.
 
+Weird thing with usergroups:
+    Take a look at how channels are added to usergroups and how the usergroup admin page reads channel info
+
 Unit Tests / TDD:
     - Channel Unit Tests:
-        - [x] get all usergroup channels
+        - [x] get all usergroup channels {DEPRECATED}
         - [x] add new channel
         - [x] delete channel
         - [x] edit channel
+        - [x] get channels by usergroup 
 
 Group-Admin Page:
     - Put dropdown tab into its own component.
     - Admin options:
         - Channels
             - Create / Delete Channels 
-            - UI -> Need to add list ofexisting channels
+            - UI 
             - API -> Still need add / remove channel functions
                 - API working to retrieve channels from group
                 - API to create a group NEEDS TESTING
-            - Service -> Need to add channel create service
-                - Write unit tests in Jasmine as you write the service.
+            - Service 
+                - CreateChannel x
+                - DeleteChannel x
+                - EditChannel x 
 
 
 

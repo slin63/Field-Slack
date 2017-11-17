@@ -23,6 +23,23 @@ router.get('/usergroup_channels', passport.authenticate('jwt', {session:false}),
     });
 });
 
+// Get all channels given a userGroupCode
+router.get('/usergroup', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    const channelIDs = req.query.user_group_code;
+    Channel.getChannels(channelIDs)
+    .then((channels, err) => {
+        if (err) {
+            return res.json({ success: false, msg: "Couldn't get channels." });
+        } else {
+            return res.json({ 
+                success: true,
+                channels: channels,
+                msg: "Successfully got channels!"
+            })
+        }
+    })
+})
+
 // Add a channel to a user group::
     // First, create the new channel object.
     // Then add the channel object's ID, name, and description to the usergroup.
@@ -35,7 +52,7 @@ router.post('/', passport.authenticate('jwt', {session:false}), (req, res, next)
     });
     Channel.addChannel(newChannel, (err, newChannel) => {
         if (err) {
-            res.json( { sucess: false, msg: 'Failed to create channel.'} );
+            res.json( { success: false, msg: 'Failed to create channel.'} );
         } else {
             UserGroup.addChannelToUserGroup(req.body.user_group_code, newChannel, (err, userGroup) => {
                 if (err) {

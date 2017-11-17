@@ -39,6 +39,8 @@ export class UsergroupService {
     ).map(res => res.json());
   }
 
+  // DEPRECATED
+  // Get usergroup channels using channelsService.getChannelsByUserGroupCode instead.
   getUserGroupChannels(userGroupCode: String) {
     const headers = this._getAuthHeader();
     const data = {

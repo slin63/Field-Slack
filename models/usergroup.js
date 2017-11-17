@@ -27,9 +27,10 @@ const UserGroupSchema = mongoose.Schema({
         role: String
     }],
     channels: [{
-        channelID: String,
-        name: String,
-        description: String
+        channelID: {
+            type: String,
+            unique: true
+        }
     }]
 });
 
@@ -79,9 +80,7 @@ module.exports.addChannelToUserGroup = function(userGroupCode, newChannel, callb
     const doc = {
         $push: {
             channels: {
-                channelID: newChannel._id,
-                name: newChannel.name,
-                description: newChannel.description
+                channelID: newChannel._id
             }
         }
     }

@@ -141,6 +141,22 @@ describe('ChannelTests', () => {
         })
     });
 
+    it('should get all channels given a usegroup_code on /channels/usergroup GET', (done) => {
+        chai.request(server)
+            .get('/channels/usergroup')
+            .set('Authorization', token)
+            .query({ user_group_code: user_group_code })
+        .then( (res) => {
+            expect(res).to.have.status('200');
+            expect(res.body).to.have.property('channels');
+            expect(res.body.channels).to.have.length(2);
+            done();
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
+    })
+
     it('should delete a channel and delete that channel ref from the userGroup on /channels DELETE', (done) => {
         query = {
             user_group_code: user_group_code,
@@ -161,7 +177,7 @@ describe('ChannelTests', () => {
             })
     });
 
-    it('should update a channel\'s description on /channels PATCH', (done) => {
+    it('should update a channel\'s description on /channels PUT', (done) => {
         const newDescription = "newDescription";
         data = {
             channel_id: channel_id,
