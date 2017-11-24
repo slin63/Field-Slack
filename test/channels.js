@@ -79,7 +79,6 @@ describe('ChannelTests', () => {
 
         .catch( (err) => {
             throw err;
-            done();
         })
     });
 
@@ -137,7 +136,6 @@ describe('ChannelTests', () => {
         })
         .catch( (err) => {
             throw err;
-            done();
         })
     });
 
@@ -153,7 +151,7 @@ describe('ChannelTests', () => {
             done();
         })
         .catch( (err) => {
-            console.log(err);
+            throw err;
         })
     })
 
@@ -173,7 +171,6 @@ describe('ChannelTests', () => {
             }) 
             .catch( (err) => {
                 throw err;
-                done();
             })
     });
 
@@ -198,7 +195,6 @@ describe('ChannelTests', () => {
             }) 
             .catch( (err) => {
                 throw err;
-                done();
             });
     });
 

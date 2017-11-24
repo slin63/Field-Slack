@@ -36,9 +36,20 @@ export class ChannelsMgmtComponent implements OnInit {
   onCreateChannelSubmit() {
     this.channelsService.createChannel(this.channelName, this.channelDescription, this.userGroupCode)
       .subscribe((res) => {
-        this.flashMessage.show('Channel created successfully!', {cssClass: 'alert-success', timeout: 3000});
+        if (res.success) {
+          this.flashMessage.show('Channel created successfully!', {cssClass: 'alert-success', timeout: 3000});
+          this._refreshChannels();
+        } else {
+          this.flashMessage.show('Channel already exists!', {cssClass: 'alert-warning', timeout: 3000});
+        });
+  }
+
+  onDeleteChannelSubmit(channelID: String) {
+    this.channelsService.deleteChannel(this.userGroupCode, channelID)
+      .subscribe((res) => {
+        this.flashMessage.show('Channel deleted successfully!', {cssClass: 'alert-success', timeout: 3000});
         this._refreshChannels();
-      })
+      });
   }
 
   onEditChannelSubmit(name: any, description: any, channelID: String) {

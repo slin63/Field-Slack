@@ -6,8 +6,14 @@
     width: 100%;
     grid-gap: 0em;
     padding: 0 0;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 2fr 7fr;
     grid-template-rows: repeat(5, 1fr);
+}
+
+hr {
+    width: 100%; 
+    height: 1.5px; 
+    background: #4E5D6C;
 }
 
 #chat-bar {

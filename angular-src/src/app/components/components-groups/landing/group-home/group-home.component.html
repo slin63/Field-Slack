@@ -2,6 +2,7 @@
 
   <div id="chat-bar">
     <div *ngIf="userGroup">
+      <!-- Start management nav -->
      <ul class="nav nav-pills">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="options-header" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -13,16 +14,35 @@
             </div>
 
             <div *ngIf="user">
-              {{ user.username }}
+              {{ user.username }} : {{ userRoleString }}
             </div>
             
           </li>
      </ul>
+     <!-- End management nav -->
+     <hr>
+     <!-- Start channel nav -->
+     <ul class="list-group" id="channel-list" *ngIf=channels>
+        <li class="list-group-item" *ngFor="let channel of channels">
+          <!-- <p class="channel-info" *ngIf="!(currentlyEditingID == channel._id)">
+            <b>{{ channel.name }}:</b> <i>{{ channel.description }}</i>
+          </p> 
+          <p class="channel-buttons" *ngIf="!(currentlyEditingID == channel._id)">
+              <button type="button" class="btn btn-success" id="edit-button" (click)="onEditClick(channel)">Edit</button>
+          </p> -->
+          <input type="submit" class="btn btn-info channel-select" value="{{ channel.name }}" (click)="onSelectChannel(channel)">  
+          
+        </li>
+      </ul>
+     <!-- End channel nav -->
+
+    
+
     </div>
   </div>
 
   <div id="chat-window">
-    {{ userGroupCode }}
+    {{ userGroupCode }} : {{ currentChannel.name }}
   </div>
 
 </div>

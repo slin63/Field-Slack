@@ -23,6 +23,11 @@ const ChannelSchema = mongoose.Schema({
     }]
 });
 
+ChannelSchema.index({
+    name: 1,
+    user_group_code: -1
+}, { unique: true });
+
 const Channel = module.exports = mongoose.model('Channel', ChannelSchema);
 
 module.exports.addChannel = function(newChannel, callback) {

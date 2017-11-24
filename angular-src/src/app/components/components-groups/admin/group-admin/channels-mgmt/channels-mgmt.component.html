@@ -19,6 +19,8 @@
           <input type="text" class="form-control" value={{channel.description}} name="description" placeholder="Description" #description>
         </div>
         <input type="submit" class="btn btn-primary" value="Save" (click)="onEditChannelSubmit(name, description, channel._id)"> 
+
+        <input type="submit" class="btn btn-danger" value="Delete" (click)="onDeleteChannelSubmit(channel._id)"> 
       </form>
     </li>
   </ul>
