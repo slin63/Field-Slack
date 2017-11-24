@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs/Observable';
 
@@ -10,21 +11,45 @@ export class ChatService {
   private url = environment.api_url;
   private socket: any;
 
-  constructor() {
+  constructor(
+    private http: Http
+  ) {
     console.log(this.url);
     this.socket = io(this.url);
   }
 
-  public sendMessage(message) {
-    this.socket.emit('new-message', message);
+  public sendMessage(channelID, messageBody) {
+    // Notify the world that we've got a new message
+    this.socket.emit('new-message', messageBody);
+
+    const headers = this._getAuthHeader();
+    const data = {
+      channel_id: channelID,
+      new_message: messageBody
+    }
+
+    return this.http.post(
+      environment.api_url + 'channels/messages',
+      data,
+      { headers: headers })
+      .map(res => res.json());
   }
 
-  public getMessages = () => {
+  public getMessagesFromSocket = () => {
     return Observable.create((observer) => {
-      this.socket.on('new-message', (message) => {
-        observer.next(message);
+      this.socket.on('new-message', (messageBody) => {
+        observer.next(messageBody);
       });
     });
   }
 
+  private _getAuthHeader(): Headers {
+    const headers = new Headers();
+    const token = localStorage.getItem('id_token');
+
+    headers.append('Authorization', token);
+    headers.append('Content-Type', 'application/json');
+
+    return headers;
+  }
 }

@@ -18,8 +18,10 @@ const ChannelSchema = mongoose.Schema({
         required: true,
     },
     messages: [{
+        user_group_code: String,
+        user_name: String,
         timestamp: String,
-        msg: String
+        content: String
     }]
 });
 
@@ -28,10 +30,15 @@ ChannelSchema.index({
     user_group_code: -1
 }, { unique: true });
 
+
 const Channel = module.exports = mongoose.model('Channel', ChannelSchema);
 
 module.exports.addChannel = function(newChannel, callback) {
     newChannel.save(callback);
+}
+
+module.exports.getChannelByID = function(channelID) {
+    return Channel.findById(channelID).exec();
 }
 
 module.exports.deleteChannel = function(channelID) {
@@ -44,6 +51,25 @@ module.exports.getChannels = function(userGroupCode) {
     }
 
     return Channel.find(query).exec();
+}
+
+module.exports.addMessage = function(channelID, newMessage) {
+    const doc = {
+        $push: {
+            messages: {
+                user_group_code: newMessage.user_group_code,
+                user_name: newMessage.user_name,
+                timestamp: newMessage.timestamp,
+                content: newMessage.content
+            }
+        }
+    }
+    // You need to specify NEW : TRUE or else it returns the old object.
+    const options =  {
+        safe: true, upsert: true, new: true
+    }
+
+    return Channel.findByIdAndUpdate(channelID, doc, options).exec();
 }
 
 module.exports.editChannel = function(channelID, channelEdits) {

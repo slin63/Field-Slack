@@ -46,7 +46,7 @@ export class GroupHomeComponent implements OnInit {
 
         // Set the local storage.
         this.userGroupService.setLocalStorageToUsergroup(this.userGroupCode, this.userGroup);
-        
+
         this.channelsService.getChannelsByUserGroupCode(this.userGroupCode)
           .subscribe(res => {
             if (res.success) {

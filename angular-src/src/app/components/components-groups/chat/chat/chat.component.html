@@ -2,9 +2,12 @@
   {{ channel._id }}
   {{ channel.name }}
   {{ channel.description }}
+  
   <div *ngIf="messages">
-    <div *ngFor="let message_ of messages">
-      {{ message_ }}
+      <!-- {{ messages }}
+      {{ messages[channel._id] }} -->
+    <div *ngFor="let message_ of messages[channel._id]">
+      {{ message_.user_name }} - {{ message_.timestamp }}: {{ message_.content }}
     </div>
   </div>
 

@@ -40,7 +40,7 @@ export class ChannelsMgmtComponent implements OnInit {
           this.flashMessage.show('Channel created successfully!', {cssClass: 'alert-success', timeout: 3000});
           this._refreshChannels();
         } else {
-          this.flashMessage.show('Channel already exists!', {cssClass: 'alert-warning', timeout: 3000});
+          this.flashMessage.show(res.msg, {cssClass: 'alert-warning', timeout: 3000});
         }
       });
   }

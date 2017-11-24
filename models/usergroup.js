@@ -51,8 +51,8 @@ module.exports.getUserGroupByUserGroupCode = function(userGroupCode, callback) {
 }
 
 module.exports.generateUserGroupCode = function() {
-    let groupCode = "";
-    const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let groupCode = '';
+    const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
   
     for (var i = 0; i < 6; i++)
       groupCode += charSet.charAt(Math.floor(Math.random() * charSet.length));

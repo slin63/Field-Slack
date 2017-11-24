@@ -28,6 +28,7 @@ describe('ChannelTests', () => {
     var user_group_code = '';
     var channel_id_to_delete = '';
     var channel_id = '';
+    var user_id = '';
     // Before:
     //  Declare auth token for later tests
     //  Create user, usergroup
@@ -62,6 +63,7 @@ describe('ChannelTests', () => {
             expect(res).to.have.status(200);
             expect(res.body.token).to.be.not.null;
             token = res.body.token;
+            user_id = res.body.user.id;
             
             return chai.request(server)
                 .post('/usergroups/create')
@@ -196,6 +198,54 @@ describe('ChannelTests', () => {
             .catch( (err) => {
                 throw err;
             });
+    });
+
+    it('should add a message to a channel on /channels/messages POST', (done) => {
+        const newMessage = {
+            user_name: 'USER_NAME',
+            timestamp: Date(),
+            content: 'Message Content',
+            user_group_code: user_group_code
+        }
+        data = {
+            channel_id: channel_id,
+            new_message: newMessage
+        }
+
+        chai.request(server)
+            .post('/channels/messages')
+            .set('Authorization', token)
+            .send(data)
+            .then( (res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property('channel');
+                expect(res.body.channel.messages[0].content).to.eql('Message Content');
+                expect(res.body.channel.messages[0].user_name).to.eql('USER_NAME');
+                expect(res.body.channel.messages[0].user_group_code).to.eql(user_group_code);
+                done();
+            })
+            .catch( (err) => {
+                throw err;
+                done(); 
+            });
+    });
+
+    it('should retrieve all ONE messages on /channels/messages GET', (done) => {
+        query = {
+            channel_id: channel_id
+        }
+        chai.request(server)
+            .get('/channels/messages')
+            .set('Authorization', token)
+            .query(query)
+            .then( (res) => {
+                expect(res).to.have.status(200)
+                expect(res.body.messages).to.have.length(1);
+                done();
+            }) 
+            .catch( (err) => {
+                throw err;
+            })
     });
 
 

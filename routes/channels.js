@@ -92,7 +92,6 @@ router.delete('/', passport.authenticate('jwt', {session:false}), (req, res, nex
     });
 });
 
-
 router.put('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     Channel.editChannel(req.body.channel_id, req.body.channel_edits)
     .then((channel, err) => {
@@ -109,6 +108,45 @@ router.put('/', passport.authenticate('jwt', {session:false}), (req, res, next) 
     .catch((err) => {
         throw err;
     })
+});
+
+// Add a message to a channel
+router.post('/messages', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.addMessage(req.body.channel_id, req.body.new_message)
+    .then((channel, err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.json({
+                success: true,
+                channel: channel,
+                msg: "Message added to channel archive."
+            });
+        }
+    })
+    .catch((err) => {
+        throw err;
+    });
+});
+
+// Get all a channel's messages
+router.get('/messages', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.getChannelByID(req.query.channel_id)
+    .then((channel, err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.json({
+                success: true,
+                channel: channel,
+                messages: channel.messages,
+                msg: "Successfully retrieved channels and messages."
+            });       
+        }
+    })
+    .catch((err) => {
+        throw err;
+    });
 });
 
 

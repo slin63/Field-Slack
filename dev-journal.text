@@ -10,12 +10,13 @@ Sockets / Chat
     - Added socket configs to app.js
         - Primitive, need to tie these to the ChannelSchema and send actual meaningful data
     - Outline
-        1. chat.component.ts: Sends message body with channel, group, timestamp, content info
+        1. chat.component.ts: Sends message body with channel, group, timestamp, content info 
         2. chat.service: Adds message to channel.messages, emits new message alert to Sockets
         3. app.js: io.sockets.emit() notifies all users that a new message for that channel has been added
-            - pushes that message to viewers and updates channels.messages array with new message
-    - Needed APIs / Tests:
-        - Add message to channel
+            - pushes that message to viewers and updates channels.messages array with new message IF the user is currently viewing that channel.
+    - Needed APIs / Tests: --> DONE
+        - Add message to channel X
+        - Get all channel messages X
 
 
 Unit Tests / TDD:
