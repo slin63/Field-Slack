@@ -8,6 +8,24 @@ const dbconfig = require('./config/database')
 const webconfig = require('./config/web')
 
 
+// SocketIO
+// https://codingblast.com/chat-application-angular-socket-io/
+
+const server = express();
+
+const http = require('http');
+const socketServer = http.Server(server);
+
+const socketIO = require('socket.io');
+const io = socketIO(socketServer);
+
+io.origins('*:*');
+// io.set('origins', 'http://localhost:3000');
+
+io.on('connection', (socket) => {
+    console.log('user connected');
+});
+
 let port = webconfig.port;
 let db = dbconfig.database;
 
@@ -30,7 +48,7 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error: ' + err);
 });
 
-const server = express();
+// socketIO
 
 // Cors Middleware
 server.use(cors());
@@ -73,13 +91,17 @@ server.get('/', (req, res) => {
     res.send('Invalid Endpoint');
 });
 
-server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-})
+// server.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public/index.html'));
+// })
 
 // Start Server
-server.listen(port, () => {
-    console.log('Server started on port ' + port);
-});
+// server.listen(port, () => {
+//     console.log('Server started on port ' + port);
+// });
+
+socketServer.listen(port, () => {
+    console.log('SocketIO enabled server started on port ' + port);
+})
 
 module.exports = server

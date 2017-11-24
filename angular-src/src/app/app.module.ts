@@ -17,12 +17,14 @@ import { GroupHomeComponent } from './components/components-groups/landing/group
 import { GroupAdminComponent } from './components/components-groups/admin/group-admin/group-admin.component';
 import { AdminNavComponent } from './components/components-groups/admin/group-admin/admin-nav/admin-nav.component';
 import { ChannelsMgmtComponent } from './components/components-groups/admin/group-admin/channels-mgmt/channels-mgmt.component';
+import { ChatComponent } from './components/components-groups/chat/chat/chat.component';
 
 import { LocalService } from './services/local.service';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { UsergroupService } from './services/usergroup.service';
 import { ChannelsService } from './services/channels.service';
+import { ChatService } from './services/chat.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -76,7 +78,8 @@ const appRoutes: Routes = [
     GroupHomeComponent,
     GroupAdminComponent,
     AdminNavComponent,
-    ChannelsMgmtComponent
+    ChannelsMgmtComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ const appRoutes: Routes = [
     AuthGuard,
     LocalService,
     UsergroupService,
-    ChannelsService
+    ChannelsService,
+    ChatService
    ],
   bootstrap: [ AppComponent ]
 })

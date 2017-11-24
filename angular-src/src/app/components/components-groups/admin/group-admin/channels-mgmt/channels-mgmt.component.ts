@@ -41,7 +41,8 @@ export class ChannelsMgmtComponent implements OnInit {
           this._refreshChannels();
         } else {
           this.flashMessage.show('Channel already exists!', {cssClass: 'alert-warning', timeout: 3000});
-        });
+        }
+      });
   }
 
   onDeleteChannelSubmit(channelID: String) {
