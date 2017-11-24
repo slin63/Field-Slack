@@ -42,3 +42,8 @@ hr {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+#message-input {
+    top: 2px;
+    bottom: 2px;
+}

@@ -8,7 +8,7 @@ import { AuthService } from 'app/services/auth.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnChanges {
   @Input() channel: any;
 
   userGroupCode: String;
@@ -36,8 +36,52 @@ export class ChatComponent implements OnInit {
       .subscribe((messageBody) => {
         console.log('NEW MESSAGE');
         this._assignMessageToChannel(messageBody);
-        // this.messages.push(message);
       });
+  }
+
+  sendMessage() {
+    if (this.message === '') {
+      return false;
+    }
+    const messageBody = {
+      user_group_code: this.userGroupCode,
+      user_name: this.user.username,
+      channel_id: this.channel._id,
+      timestamp: new Date(),
+      content: this.message
+    };
+
+    console.log(messageBody);
+
+    this.message = '';
+
+    // Need to update chat.service to get all previous messages
+    this.chatService.sendMessage(this.channel._id, messageBody)
+    .subscribe(res => {
+      if (res.success) {
+        console.log('Successfully added message');
+        console.log('SCROLLED TO BOTTOM');
+        this._scrollToBottom();
+      } else {
+        console.log('Failed to add message');
+      }
+    });
+  }
+
+  // Called on changes to module @input()s.
+  ngOnChanges(changes: {[propKey: string]: any}) {
+    if (this.channel) {
+      this._initMessagesForChannel();
+    }
+  }
+
+  public onSearchBox() {
+    ;
+  }
+
+  private _scrollToBottom() {
+    const chatbox = document.getElementById('message-window');
+    chatbox.scrollTop = chatbox.scrollHeight;
   }
 
   // Assigns a message to its appropriate channel in this.messages.
@@ -68,55 +112,10 @@ export class ChatComponent implements OnInit {
         return true;
       }
     }
-    return false; 
+    return false;
   }
 
-  sendMessage() {
-    const messageBody = {
-      user_group_code: this.userGroupCode,
-      user_name: this.user.username,
-      channel_id: this.channel._id,
-      timestamp: new Date(),
-      content: this.message
-    };
-
-    console.log(messageBody);
-
-    this.message = '';
-
-    // Need to update chat.service to get all previous messages
-    this.chatService.sendMessage(this.channel._id, messageBody)
-    .subscribe(res => {
-      if (res.success) {
-        console.log('Successfully added message');
-      } else {
-        console.log('Failed to add message');
-      }
-    });
-  }
-
-  // Called on changes to module @input()s.
-  ngOnChanges(changes: {[propKey: string]: any}) {
-    if (this.channel) {
-      this._initMessagesForChannel();
-    }
-    // If we haven't already initialized the message cache for this channel
-    // if (!(this._channelIDInChannelJSON(this.channel._id)) && (this.channel != null)) {
-    //   this._initMessagesForChannel();
-    // }
-    // let log: string[] = [];
-    // for (let propName in changes) {
-    //   let changedProp = changes[propName];
-    //   let to = JSON.stringify(changedProp.currentValue);
-    //   if (changedProp.isFirstChange()) {
-    //     log.push(`Initial value of ${propName} set to ${to}`);
-    //   } else {
-    //     let from = JSON.stringify(changedProp.previousValue);
-    //     log.push(`${propName} changed from ${from} to ${to}`);
-    //   }
-    // }
-    // console.log(log);
-  }
+  
 
   private _initMessagesForChannel() {
     this.messages[this.channel._id] = this.channel.messages;
