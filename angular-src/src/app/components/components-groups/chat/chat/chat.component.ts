@@ -35,6 +35,7 @@ export class ChatComponent implements OnInit, OnChanges {
       .getMessagesFromSocket()
       .subscribe((messageBody) => {
         console.log('NEW MESSAGE');
+        
         this._assignMessageToChannel(messageBody);
       });
   }
@@ -60,6 +61,7 @@ export class ChatComponent implements OnInit, OnChanges {
     .subscribe(res => {
       if (res.success) {
         console.log('Successfully added message');
+
         console.log('SCROLLED TO BOTTOM');
         this._scrollToBottom();
       } else {
@@ -81,7 +83,9 @@ export class ChatComponent implements OnInit, OnChanges {
 
   private _scrollToBottom() {
     const chatbox = document.getElementById('message-window');
-    chatbox.scrollTop = chatbox.scrollHeight;
+    if (chatbox != null) {
+      setTimeout(() => {chatbox.scrollTop = chatbox.scrollHeight}, 100);
+    }
   }
 
   // Assigns a message to its appropriate channel in this.messages.
@@ -99,6 +103,9 @@ export class ChatComponent implements OnInit, OnChanges {
       console.log('not found');
     }
 
+    console.log('SCROLLED TO BOTTOM');
+    this._scrollToBottom();
+
     console.log(this.messages);
   }
 
@@ -115,12 +122,13 @@ export class ChatComponent implements OnInit, OnChanges {
     return false;
   }
 
-  
-
   private _initMessagesForChannel() {
     this.messages[this.channel._id] = this.channel.messages;
     console.log('CALLED INIT MESSAGES FOR CHANNEL');
     console.log(this.messages);
+
+    console.log('SCROLLED TO BOTTOM');
+    this._scrollToBottom();
   }
 
 }

@@ -3,7 +3,7 @@
     position: absolute;
     height: 100%;
     width: 77.6%;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
     grid-row-gap: 8px;
     padding: 8px;
 }
@@ -33,6 +33,8 @@ hr {
 #message-window {
     display: grid;
     grid-row: 2/8;
+    /* display: flex; */
+    /* flex-direction: column-reverse; */
     overflow: scroll;
     background: rgb(203, 225, 203);
     color: black;

@@ -14,12 +14,12 @@
   <!-- <hr> -->
   </div>
 
-  
+  <!-- https://github.com/philipwalton/flexbugs/issues/108 -->
   <div id="message-window" *ngIf="messages">
       <!-- {{ messages }}
       {{ messages[channel._id] }} -->
-    <ul>
-      <li *ngFor="let message_ of messages[channel._id]">
+    <ul id="messages">
+      <li *ngFor="let message_ of messages[channel._id]" class="message">
         {{ message_.user_name }} - {{ message_.timestamp }}: {{ message_.content }}
       </li>
     </ul>

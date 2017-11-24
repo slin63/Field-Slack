@@ -17,6 +17,8 @@ Sockets / Chat
     - Needed APIs / Tests: --> DONE
         - Add message to channel X
         - Get all channel messages X
+    - I have no fucking idea how to make it scroll to the bottom consistently.
+        -> You had to set it on a delay of ~100ms so that the element would have ample time to refresh and provide updated height dimensions data
 
 
 Unit Tests / TDD:
