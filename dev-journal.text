@@ -6,6 +6,18 @@ I'm dumb.
 Weird thing with usergroups:
     Take a look at how channels are added to usergroups and how the usergroup admin page reads channel info
 
+Sockets / Chat
+    - Added socket configs to app.js
+        - Primitive, need to tie these to the ChannelSchema and send actual meaningful data
+    - Outline
+        1. chat.component.ts: Sends message body with channel, group, timestamp, content info
+        2. chat.service: Adds message to channel.messages, emits new message alert to Sockets
+        3. app.js: io.sockets.emit() notifies all users that a new message for that channel has been added
+            - pushes that message to viewers and updates channels.messages array with new message
+    - Needed APIs / Tests:
+        - Add message to channel
+
+
 Unit Tests / TDD:
     - Channel Unit Tests:
         - [x] get all usergroup channels {DEPRECATED}
@@ -27,8 +39,6 @@ Group-Admin Page:
                 - CreateChannel x
                 - DeleteChannel x
                 - EditChannel x 
-
-
 
 Group-home landing page:
     - Need to prevent page from rendering until all data is gotten.

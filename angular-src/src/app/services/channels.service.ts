@@ -88,7 +88,7 @@ export class ChannelsService {
     ).map(res => res.json());
   }
 
-  _getAuthHeader(): Headers {
+  private _getAuthHeader(): Headers {
     const headers = new Headers();
     const token = localStorage.getItem('id_token');
 

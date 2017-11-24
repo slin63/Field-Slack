@@ -4,9 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const dbconfig = require('./config/database')
-const webconfig = require('./config/web')
-
+const dbconfig = require('./config/database');
+const webconfig = require('./config/web');
 
 // SocketIO
 // https://codingblast.com/chat-application-angular-socket-io/
@@ -24,7 +23,14 @@ io.origins('*:*');
 
 io.on('connection', (socket) => {
     console.log('user connected');
+
+    socket.on('new-message', (message) => {
+        // Emit sends an event to everyone connected to the server.
+        io.sockets.emit('new-message', message);
+    });
 });
+
+
 
 let port = webconfig.port;
 let db = dbconfig.database;

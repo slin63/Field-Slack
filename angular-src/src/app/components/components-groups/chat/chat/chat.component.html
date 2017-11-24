@@ -2,4 +2,12 @@
   {{ channel._id }}
   {{ channel.name }}
   {{ channel.description }}
+  <div *ngIf="messages">
+    <div *ngFor="let message_ of messages">
+      {{ message_ }}
+    </div>
+  </div>
+
+  <input [(ngModel)]="message"/>
+  <button (click)="sendMessage()">Send</button>
 </div>
