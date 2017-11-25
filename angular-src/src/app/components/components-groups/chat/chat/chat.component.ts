@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit, OnChanges {
       .getMessagesFromSocket()
       .subscribe((messageBody) => {
         console.log('NEW MESSAGE');
-        
+
         this._assignMessageToChannel(messageBody);
       });
   }

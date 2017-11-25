@@ -30,6 +30,32 @@ hr {
     background: #4E5D6C;
 }
 
+.search {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#channel-info {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: left;
+}
+
+#search-controls {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    /* I dont care one of these does what i want it to do and im not touching it */
+    justify-content: right;
+    justify-items: right;
+    justify-self: right;
+    align-self: right;
+    align-content: right;
+    align-items: right;
+}
+
 #message-window {
     display: grid;
     grid-row: 2/8;

@@ -1,14 +1,19 @@
 <div *ngIf="channel" id="chat">
   <div class="channel-header">
-    <div id="channel-info">
-      <h2>{{ channel.name }}: {{ channel.description }}</h2> 
-    </div>
+    
 
-    <div id="search">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" placeholder="Search" type="text">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <div class="search">
+        
+            <div id="channel-info">
+                <h2>{{ channel.name }}: {{ channel.description }}</h2> 
+            </div>
+            <div id="search-controls">
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control" placeholder="Search" type="text">
+                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            
     </div>
     
   <!-- <hr> -->
