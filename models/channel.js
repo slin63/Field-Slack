@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectId; 
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs'); // For encryption
 const config = require('../config/database');
@@ -29,6 +31,7 @@ ChannelSchema.index({
     name: 1,
     user_group_code: -1
 }, { unique: true });
+
 
 
 const Channel = module.exports = mongoose.model('Channel', ChannelSchema);
@@ -79,4 +82,39 @@ module.exports.editChannel = function(channelID, channelEdits) {
     }
 
     return Channel.findByIdAndUpdate(channelID, channelEdits, options).exec();
+}
+
+module.exports.findMessageByString = function(channelID, searchString) {
+    // https://stackoverflow.com/questions/26794197/how-to-find-substring-in-array-using-mongo
+    // This is why I don't love Mongo
+    const searchCriteria = [
+        new RegExp(searchString)
+    ];
+
+    const query = {
+        _id: ObjectID(channelID),
+        $match : {
+            "messages.content" : {
+                $in: searchCriteria
+            }
+        }
+    };
+
+    return Channel.aggregate([
+        query, // Filter to match documents
+        {
+            $unwind: '$messages' // Split messages array and match again to filter out unmatched items
+        },
+        query,
+
+        // Reshape the messages array
+        {
+            $group : {
+                _id: '$_id',
+                messages: {
+                    $push: '$messages'
+                }
+            }
+        }
+    ]).exec();
 }

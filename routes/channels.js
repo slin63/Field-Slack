@@ -149,5 +149,23 @@ router.get('/messages', passport.authenticate('jwt', {session:false}), (req, res
     });
 });
 
+// Search and return a channel's messages by string
+router.get('/messages', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.findMessagesByString(req.query.channel_id, req.query.string)
+    .then((messages, err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.json({
+                success: true,
+                messages: messages,
+                msg: "Found messages with string in them."
+            })
+        }
+    })
+    .catch((err) => {
+        throw err;
+    });
+});
 
 module.exports = router;

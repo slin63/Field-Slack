@@ -201,10 +201,11 @@ describe('ChannelTests', () => {
     });
 
     it('should add a message to a channel on /channels/messages POST', (done) => {
+        const msg = 'Message Content, 1234, 4567, 45,67';
         const newMessage = {
             user_name: 'USER_NAME',
             timestamp: Date(),
-            content: 'Message Content',
+            content: msg,
             user_group_code: user_group_code
         }
         data = {
@@ -219,7 +220,7 @@ describe('ChannelTests', () => {
             .then( (res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.property('channel');
-                expect(res.body.channel.messages[0].content).to.eql('Message Content');
+                expect(res.body.channel.messages[0].content).to.eql(msg);
                 expect(res.body.channel.messages[0].user_name).to.eql('USER_NAME');
                 expect(res.body.channel.messages[0].user_group_code).to.eql(user_group_code);
                 done();
@@ -245,9 +246,29 @@ describe('ChannelTests', () => {
             }) 
             .catch( (err) => {
                 throw err;
-            })
+            });
     });
 
+    it('should return ONE message on /channel/messages/:search_string GET', (done) => {
+        const search_string = '1234';
+        query = {
+            channel_id: channel_id,
+            search_string: search_string
+        }
+        chai.request(server)
+            .get('/channels/messages')
+            .set('Authorization', token)
+            .query(query)
+            .then( (res) => {
+                expect(res).to.have.status(200)
+                console.log(res.body.messages);
+                expect(res.body.messages).to.have.length(1);
+                done()
+            })
+            .catch( (err) => {
+                throw err;
+            });
+    });
 
     after((done) => {
         var promise = User.remove({}).exec();
