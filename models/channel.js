@@ -84,16 +84,18 @@ module.exports.editChannel = function(channelID, channelEdits) {
     return Channel.findByIdAndUpdate(channelID, channelEdits, options).exec();
 }
 
-module.exports.findMessageByString = function(channelID, searchString) {
+module.exports.findMessagesByString = function(channelID, searchString) {
     // https://stackoverflow.com/questions/26794197/how-to-find-substring-in-array-using-mongo
     // This is why I don't love Mongo
     const searchCriteria = [
         new RegExp(searchString)
     ];
 
+    // console.log(searchString);
+
     const query = {
-        _id: ObjectID(channelID),
         $match : {
+            "_id": ObjectId(channelID),
             "messages.content" : {
                 $in: searchCriteria
             }

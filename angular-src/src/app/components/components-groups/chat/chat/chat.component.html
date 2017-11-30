@@ -9,8 +9,8 @@
             </div>
             <div id="search-controls">
                 <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control" placeholder="Search" type="text">
-                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                  <input class="form-control" name="searchString" [(ngModel)]="searchString" placeholder="Search" type="text">
+                  <button (click)="onSearchBox()" class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
             

@@ -256,12 +256,11 @@ describe('ChannelTests', () => {
             search_string: search_string
         }
         chai.request(server)
-            .get('/channels/messages')
+            .get('/channels/messages*')
             .set('Authorization', token)
             .query(query)
             .then( (res) => {
                 expect(res).to.have.status(200)
-                console.log(res.body.messages);
                 expect(res.body.messages).to.have.length(1);
                 done()
             })

@@ -15,6 +15,8 @@ export class ChatComponent implements OnInit, OnChanges {
   userGroup: any;
   user: any;
 
+  searchString: string;
+
   message: string;
   messages: any;
   // [{ channel_id: [{ messages }]}]
@@ -78,7 +80,15 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   public onSearchBox() {
-    ;
+    console.log('SEARCHING FOR: ' + this.searchString);
+    this.chatService.findMessageByString(this.channel._id, this.searchString).subscribe(res => {
+      if (res.success) {
+        console.log('GOT:');
+        console.log(res.messages);
+      } else {
+        console.log('Failed');
+      }
+    });
   }
 
   private _scrollToBottom() {

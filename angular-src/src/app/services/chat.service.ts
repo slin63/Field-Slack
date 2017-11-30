@@ -35,12 +35,29 @@ export class ChatService {
       .map(res => res.json());
   }
 
-  public getMessagesFromSocket = () => {
+  public getMessagesFromSocket()  {
     return Observable.create((observer) => {
       this.socket.on('new-message', (messageBody) => {
         observer.next(messageBody);
       });
     });
+  }
+
+  public findMessageByString(channelID, searchString) {
+    const headers = this._getAuthHeader();
+    const data = {
+      channel_id: channelID,
+      search_string: searchString
+    }
+    const config = {
+      params: data,
+      headers: headers
+    };
+
+    return this.http.get(
+      environment.api_url + 'channels/messages*',
+      config
+    ).map(res => res.json());
   }
 
   private _getAuthHeader(): Headers {
@@ -52,4 +69,5 @@ export class ChatService {
 
     return headers;
   }
+  
 }

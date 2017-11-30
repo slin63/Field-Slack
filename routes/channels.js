@@ -150,15 +150,15 @@ router.get('/messages', passport.authenticate('jwt', {session:false}), (req, res
 });
 
 // Search and return a channel's messages by string
-router.get('/messages', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    Channel.findMessagesByString(req.query.channel_id, req.query.string)
-    .then((messages, err) => {
+router.get('/messages*', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Channel.findMessagesByString(req.query.channel_id, req.query.search_string)
+    .then((channel, err) => {
         if (err) {
             throw err;
         } else {
             res.json({
                 success: true,
-                messages: messages,
+                messages: channel[0].messages,
                 msg: "Found messages with string in them."
             })
         }
